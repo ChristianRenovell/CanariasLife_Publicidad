@@ -40,7 +40,7 @@ controller.update = (req, res) => {
   const newCustomer = req.body;
   req.getConnection((err, conn) => {
 
-  conn.query('UPDATE customer set ? where id = ?', [newCustomer, id], (err, rows) => {
+  conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
     res.redirect('/');
   });
   });
@@ -49,7 +49,7 @@ controller.update = (req, res) => {
 controller.delete = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query('DELETE FROM customer WHERE id = ?', [id], (err, rows) => {
+    connection.query('DELETE FROM clientes WHERE id = ?', [id], (err, rows) => {
       res.redirect('/');
     });
   });
