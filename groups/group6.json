@@ -1,0 +1,32 @@
+[
+    {
+        "id": "26",
+        "name": "promo_26",
+        "banner": "http//...banner../",
+        "video": "http//...video../"
+    },
+    {
+        "id": "27",
+        "name": "promo_27",
+        "banner": "http//...banner../",
+        "video": "http//...video../"
+    },
+    {
+        "id": "28",
+        "name": "promo_28",
+        "banner": "http//...banner../",
+        "video": "http//...video../"
+    },
+    {
+        "id": "29",
+        "name": "promo_29",
+        "banner": "http//...banner../",
+        "video": "http//...video../"
+    },
+    {
+        "id": "30",
+        "name": "promo_30",
+        "banner": "http//...banner../",
+        "video": "http//...video../"
+    }
+]
