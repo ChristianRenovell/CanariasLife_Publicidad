@@ -1,6 +1,6 @@
 //conprobar la franja horaria en que estamos
 var dd = new Date();
-let minu = dd.getMinutes()
+let minu = dd.getMinutes();
 if(minu >= 0 && minu <=5) gettJsonVideo("group1");
 if(minu > 5 && minu <=10) gettJsonVideo("group2");
 if(minu > 10 && minu <=15) gettJsonVideo("group3");
@@ -13,7 +13,6 @@ if(minu > 40 && minu <=45) gettJsonVideo("group9");
 if(minu > 45 && minu <=50) gettJsonVideo("group10");
 if(minu > 50 && minu <=55) gettJsonVideo("group11");
 if(minu > 55 && minu <=60) gettJsonVideo("group12");
-
 
 //reibe datos json
 function gettJsonVideo(group){
@@ -38,8 +37,14 @@ function createVideo(data) {
 
         let tag = document.querySelector("iframe"); 
 
-        console.log(data[number].video)
-
         tag.setAttribute("src", data[number].video);
+
+        loggerVideo(data[number].id);
      
+}
+//almacenamos la visualizacion de video para el informe
+function loggerVideo(id) {
+
+
+
 }

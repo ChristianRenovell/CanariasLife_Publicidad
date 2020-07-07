@@ -41,6 +41,12 @@ function createBanner(data) {
         console.log(data[number].banner)
 
         tag.setAttribute("src", data[number].banner);
-}
 
+        loggerBanner(data[number].id);
+}
+//almacenamos la visualización del Banner para el informe
+function loggerBanner(id){
+
+  
+}
 
