@@ -2,7 +2,8 @@ const express = require('express'),
       path = require('path'),
       morgan = require('morgan'),
       mysql = require('mysql'),
-      myConnection = require('express-myconnection');
+      myConnection = require('express-myconnection'),
+      cors = require('cors');
 
 const app = express();
 
@@ -10,6 +11,7 @@ const app = express();
 const customerRoutes = require('./routes/customer');
 
 // settings
+app.use(cors());
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

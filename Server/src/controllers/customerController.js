@@ -13,6 +13,17 @@ controller.list = (req, res) => {
   });
 };
 
+controller.listData = (req, res) => {
+  req.getConnection((err, conn) => {
+    conn.query('SELECT * FROM clientes', (err, customers) => {
+     if (err) {
+      res.json(err);
+     }
+     res.json(customers);
+    });
+  });
+};
+
 controller.save = (req, res) => {
   const data = req.body;
   console.log(req.body)

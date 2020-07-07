@@ -15,30 +15,44 @@ if(min > 50 && min <=55) gettJson("group11");
 if(min > 55 && min <=60) gettJson("group12");
 
 
+/*------------------------
+--------------------------
+FALTA MODIFICAR PARAMETROS ENVIADOS POR FRANJA HORARIA Y MODIFICAR 
+LA RUTA DEL SERVIDOR PARA QUE DEVUELVA 5 EN FUNCION E ESTOS PARAMETROS
+---------------------------
+--------------------------*/
+
+
 //reibe datos json
 function gettJson(group){
 
-    const requestURL = `https://raw.githubusercontent.com/ChristianRenovell/CanariasLife_Publicidad/Christian/groups/${group}.json`;
-    const request = new XMLHttpRequest();
-    request.open('GET', requestURL);
-    request.responseType = 'json';
-    request.send();
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("http://localhost:3000/list", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result,"resultado");
+      createBanner(result);
 
-    request.onload = function() {
-        const jsonData = request.response;
-        createBanner(jsonData) 
-      }
+    })
+    .catch(error => console.log('error', error));
+    
 }
 
 //crea el banner
 function createBanner(data) {
 
+        let dataJ = JSON.parse(data)
         //nombra al benner que se mostrara
         let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
-        let tag = document.querySelector("img"); 
+        let tag = document.querySelector("img");
 
-        console.log(data[number].banner)
+        
+        console.log(dataJ[number].banner)
 
         tag.setAttribute("src", data[number].banner);
 
