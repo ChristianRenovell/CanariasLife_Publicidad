@@ -38,9 +38,7 @@ function createBanner(data) {
 
         let tag = document.querySelector("img"); 
 
-        console.log(data[number].banner)
+        console.log(data[number].video)
 
-        tag.setAttribute("src", data[number].banner);
+        tag.setAttribute("src", data[number].video);
 }
-
-
