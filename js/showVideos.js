@@ -1,22 +1,22 @@
 //conprobar la franja horaria en que estamos
-var d = new Date();
-let min = d.getMinutes()
-if(min >= 0 && min <=5) gettJson("group1");
-if(min > 5 && min <=10) gettJson("group2");
-if(min > 10 && min <=15) gettJson("group3");
-if(min > 15 && min <=20) gettJson("group4");
-if(min > 20 && min <=25) gettJson("group5");
-if(min > 25 && min <=30) gettJson("group6");
-if(min > 30 && min <=35) gettJson("group7");
-if(min > 35 && min <=40) gettJson("group8");
-if(min > 40 && min <=45) gettJson("group9");
-if(min > 45 && min <=50) gettJson("group10");
-if(min > 50 && min <=55) gettJson("group11");
-if(min > 55 && min <=60) gettJson("group12");
+var dd = new Date();
+let minu = dd.getMinutes()
+if(minu >= 0 && minu <=5) gettJsonVideo("group1");
+if(minu > 5 && minu <=10) gettJsonVideo("group2");
+if(minu > 10 && minu <=15) gettJsonVideo("group3");
+if(minu > 15 && minu <=20) gettJsonVideo("group4");
+if(minu > 20 && minu <=25) gettJsonVideo("group5");
+if(minu > 25 && minu <=30) gettJsonVideo("group6");
+if(minu > 30 && minu <=35) gettJsonVideo("group7");
+if(minu > 35 && minu <=40) gettJsonVideo("group8");
+if(minu > 40 && minu <=45) gettJsonVideo("group9");
+if(minu > 45 && minu <=50) gettJsonVideo("group10");
+if(minu > 50 && minu <=55) gettJsonVideo("group11");
+if(minu > 55 && minu <=60) gettJsonVideo("group12");
 
 
 //reibe datos json
-function gettJson(group){
+function gettJsonVideo(group){
 
     const requestURL = `https://raw.githubusercontent.com/ChristianRenovell/CanariasLife_Publicidad/Christian/groups/${group}.json`;
     const request = new XMLHttpRequest();
@@ -26,19 +26,20 @@ function gettJson(group){
 
     request.onload = function() {
         const jsonData = request.response;
-        createBanner(jsonData) 
+        createVideo(jsonData) 
       }
 }
 
 //crea el banner
-function createBanner(data) {
+function createVideo(data) {
 
         //nombra al benner que se mostrara
         let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
-        let tag = document.querySelector("img"); 
+        let tag = document.querySelector("iframe"); 
 
         console.log(data[number].video)
 
         tag.setAttribute("src", data[number].video);
+     
 }
