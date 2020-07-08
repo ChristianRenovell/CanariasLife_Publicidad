@@ -26,7 +26,7 @@ controller.listData = (req, res) => {
   });
 };
 
-//registra las  banner y el video
+//registra las  banner 
 controller.loggerBanner = (req, res) => {
 
   let now;
@@ -42,7 +42,7 @@ controller.loggerBanner = (req, res) => {
 
   req.getConnection((err, conn) => {
     //INSERT INTO history (`id` , `dataBanner`) VALUES ( '2' , '2020-07-07 18:19:00')
-    conn.query(`INSERT INTO history ( id , dataBanner)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
+    conn.query(`INSERT INTO historyBanner ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
       if (err) {
        res.json(err);
       }
@@ -50,6 +50,33 @@ controller.loggerBanner = (req, res) => {
      });
   })
 };
+
+
+//registra visualizaciones del video
+controller.loggerVideo = (req, res) => {
+
+  let now;
+  let date = new Date()
+  let day = date.getDate()
+  let month = date.getMonth() + 1
+  let year = date.getFullYear()
+  let hora = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+  
+  now = `${year}-${month}-${day}`;
+  
+  let grupDateHours = now+' '+hora;
+
+  req.getConnection((err, conn) => {
+   
+    conn.query(`INSERT INTO historyVideo ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
+      if (err) {
+       res.json(err);
+      }
+      console.log("guardado")
+     });
+  })
+};
+
 
 
 controller.save = (req, res) => {

@@ -14,15 +14,6 @@ if (min > 45 && min <= 50) gettJson(46, 50);
 if (min > 50 && min <= 55) gettJson(51, 55);
 if (min > 55 && min <= 60) gettJson(56, 60);
 
-
-/*------------------------
---------------------------
-FALTA MODIFICAR PARAMETROS ENVIADOS POR FRANJA HORARIA Y MODIFICAR 
-LA RUTA DEL SERVIDOR PARA QUE DEVUELVA 5 EN FUNCION E ESTOS PARAMETROS
----------------------------
---------------------------*/
-
-
 //reibe datos json
 function gettJson(nin1, nin2) {
 
@@ -31,8 +22,8 @@ function gettJson(nin1, nin2) {
     redirect: 'follow'
   };
 
-  //fetch(`http://localhost:3000/list/${nin1}/${nin2}`, requestOptions)
-  fetch(`http://localhost:3000/list/0/5`, requestOptions)
+  //fetch(`http://localhost:3000/list/0/5`, requestOptions)
+  fetch(`http://localhost:3000/list/${nin1}/${nin2}`, requestOptions)
     .then(response => response.text())
     .then(result => {
       console.log(result, "resultado");
