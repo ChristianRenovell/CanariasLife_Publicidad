@@ -2,7 +2,11 @@ const router = require('express').Router();
 
 const customerController = require('../controllers/customerController');
 
-router.get('/', customerController.list);
+
+router.get('/prueba/:id/:id2', customerController.prueba);
+router.get('/', customerController.index);
+
+router.get('/list/:id/:id2', customerController.list);
 router.post('/list/:nm1/:nm2', customerController.listData);
 router.post('/loggerBanner/:id', customerController.loggerBanner);
 router.post('/loggerVideo/:id', customerController.loggerVideo);

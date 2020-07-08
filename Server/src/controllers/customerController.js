@@ -1,8 +1,21 @@
 const controller = {};
 
+
+controller.prueba = (req, res) => {
+
+  res.render('prueba', {
+    data: req.params
+ });
+};
+
+controller.index = (req, res) => {
+
+  res.render('index');
+};
+
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query('SELECT * FROM clientes', (err, customers) => {
+    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.id} AND ${req.params.id2};`, (err, customers) => {
      if (err) {
       res.json(err);
      }
@@ -13,9 +26,8 @@ controller.list = (req, res) => {
   });
 };
 
-//devuelve los 5 clientes de la franja horaria
+//devuelve los 5 clientes de la franja horaria para mostrarlos en el frontend
 controller.listData = (req, res) => {
-  console.log(req.params.nm1,"esto llega al servidor")
   req.getConnection((err, conn) => {
     conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.nm1} AND ${req.params.nm2};`, (err, customers) => {
      if (err) {
