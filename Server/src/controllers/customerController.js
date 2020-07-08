@@ -1,18 +1,11 @@
 const controller = {};
 
-
-controller.prueba = (req, res) => {
-
-  res.render('prueba', {
-    data: req.params
- });
-};
-
+//pagina principal
 controller.index = (req, res) => {
-
   res.render('index');
 };
 
+//muestra los componentes de un --grupo
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.id} AND ${req.params.id2};`, (err, customers) => {
@@ -25,6 +18,19 @@ controller.list = (req, res) => {
     });
   });
 };
+
+//muestra los registros del historial
+controller.report = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM historyBanner WHERE id = ?", [id], (err, dataHistory) => {
+      res.render('reports', {
+        data: dataHistory
+      })
+    });
+  });
+};
+
 
 //devuelve los 5 clientes de la franja horaria para mostrarlos en el frontend
 controller.listData = (req, res) => {
@@ -119,7 +125,7 @@ controller.update = (req, res) => {
   req.getConnection((err, conn) => {
 
   conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
-    res.redirect('/');
+    res.redirect('/list');
   });
   });
 };
