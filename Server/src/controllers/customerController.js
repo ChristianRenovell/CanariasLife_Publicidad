@@ -1,5 +1,9 @@
 const controller = {};
 
+controller.index = (req, res) => {
+  res.render("index")
+};
+
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query('SELECT * FROM clientes', (err, customers) => {
@@ -85,7 +89,7 @@ controller.save = (req, res) => {
   req.getConnection((err, connection) => {
     const query = connection.query('INSERT INTO clientes set ?', data, (err, customer) => {
       console.log(customer)
-      res.redirect('/');
+      res.redirect('/list');
     })
   })
 };
@@ -107,7 +111,7 @@ controller.update = (req, res) => {
   req.getConnection((err, conn) => {
 
   conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
-    res.redirect('/');
+    res.redirect('/list');
   });
   });
 };
@@ -116,7 +120,7 @@ controller.delete = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query('DELETE FROM clientes WHERE id = ?', [id], (err, rows) => {
-      res.redirect('/');
+      res.redirect('/list');
     });
   });
 }
