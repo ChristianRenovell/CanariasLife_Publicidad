@@ -3,7 +3,8 @@ const express = require('express'),
       morgan = require('morgan'),
       mysql = require('mysql'),
       myConnection = require('express-myconnection'),
-      cors = require('cors');
+      cors = require('cors'),
+      bodyParser = require('body-parser');
 
 const app = express();
 
@@ -16,8 +17,11 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 // middlewares
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
 app.use(myConnection(mysql, {
   host: 'localhost',
   user: 'root',

@@ -1,18 +1,18 @@
 //conprobar la franja horaria en que estamos
 var d = new Date();
 let min = d.getMinutes()
-if(min >= 0 && min <=5) gettJson("group1");
-if(min > 5 && min <=10) gettJson("group2");
-if(min > 10 && min <=15) gettJson("group3");
-if(min > 15 && min <=20) gettJson("group4");
-if(min > 20 && min <=25) gettJson("group5");
-if(min > 25 && min <=30) gettJson("group6");
-if(min > 30 && min <=35) gettJson("group7");
-if(min > 35 && min <=40) gettJson("group8");
-if(min > 40 && min <=45) gettJson("group9");
-if(min > 45 && min <=50) gettJson("group10");
-if(min > 50 && min <=55) gettJson("group11");
-if(min > 55 && min <=60) gettJson("group12");
+if (min >= 0 && min <= 5) gettJson(0, 5);
+if (min > 5 && min <= 10) gettJson(6, 10);
+if (min > 10 && min <= 15) gettJson(11, 15);
+if (min > 15 && min <= 20) gettJson(16, 20);
+if (min > 20 && min <= 25) gettJson(21, 25);
+if (min > 25 && min <= 30) gettJson(26, 30);
+if (min > 30 && min <= 35) gettJson(31, 35);
+if (min > 35 && min <= 40) gettJson(36, 40);
+if (min > 40 && min <= 45) gettJson(41, 45);
+if (min > 45 && min <= 50) gettJson(46, 50);
+if (min > 50 && min <= 55) gettJson(51, 55);
+if (min > 55 && min <= 60) gettJson(56, 60);
 
 
 /*------------------------
@@ -24,43 +24,52 @@ LA RUTA DEL SERVIDOR PARA QUE DEVUELVA 5 EN FUNCION E ESTOS PARAMETROS
 
 
 //reibe datos json
-function gettJson(group){
+function gettJson(nin1, nin2) {
 
   var requestOptions = {
-    method: 'GET',
+    method: 'POST',
     redirect: 'follow'
   };
-  
-  fetch("http://localhost:3000/list", requestOptions)
+
+  //fetch(`http://localhost:3000/list/${nin1}/${nin2}`, requestOptions)
+  fetch(`http://localhost:3000/list/0/5`, requestOptions)
     .then(response => response.text())
     .then(result => {
-      console.log(result,"resultado");
+      console.log(result, "resultado");
       createBanner(result);
-
     })
     .catch(error => console.log('error', error));
-    
+
 }
 
 //crea el banner
 function createBanner(data) {
 
-        let dataJ = JSON.parse(data)
-        //nombra al benner que se mostrara
-        let number = Math.floor(Math.random() * (5 - 0)) + 0;
+  let dataJ = JSON.parse(data)
+  //nombra al benner que se mostrara
+  let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
-        let tag = document.querySelector("img");
+  let tag = document.querySelector("img");
 
-        
-        console.log(dataJ[number].banner)
+  tag.setAttribute("src", dataJ[number].banner);
 
-        tag.setAttribute("src", data[number].banner);
-
-        loggerBanner(data[number].id);
+  loggerBanner(dataJ[number].id);
 }
 //almacenamos la visualización del Banner para el informe
-function loggerBanner(id){
+function loggerBanner(id) {
 
-  
+  var formData = new FormData();
+
+  var requestOptions = {
+    method: 'POST',
+    redirect: 'follow',
+  };
+
+  fetch(`http://localhost:3000/loggerBanner/${id}`, requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+
 }
 

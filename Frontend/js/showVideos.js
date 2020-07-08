@@ -1,50 +1,54 @@
 //conprobar la franja horaria en que estamos
-var dd = new Date();
-let minu = dd.getMinutes();
-if(minu >= 0 && minu <=5) gettJsonVideo("group1");
-if(minu > 5 && minu <=10) gettJsonVideo("group2");
-if(minu > 10 && minu <=15) gettJsonVideo("group3");
-if(minu > 15 && minu <=20) gettJsonVideo("group4");
-if(minu > 20 && minu <=25) gettJsonVideo("group5");
-if(minu > 25 && minu <=30) gettJsonVideo("group6");
-if(minu > 30 && minu <=35) gettJsonVideo("group7");
-if(minu > 35 && minu <=40) gettJsonVideo("group8");
-if(minu > 40 && minu <=45) gettJsonVideo("group9");
-if(minu > 45 && minu <=50) gettJsonVideo("group10");
-if(minu > 50 && minu <=55) gettJsonVideo("group11");
-if(minu > 55 && minu <=60) gettJsonVideo("group12");
+var d = new Date();
+let min = d.getMinutes()
+if(min >= 0 && min <=5) gettJson(0,5);
+if(min > 5 && min <=10) gettJson(6,10);
+if(min > 10 && min <=15) gettJson(11,15);
+if(min > 15 && min <=20) gettJson(16,20);
+if(min > 20 && min <=25) gettJson(21,25);
+if(min > 25 && min <=30) gettJson(26,30);
+if(min > 30 && min <=35) gettJson(31,35);
+if(min > 35 && min <=40) gettJson(36,40);
+if(min > 40 && min <=45) gettJson(41,45);
+if(min > 45 && min <=50) gettJson(46,50);
+if(min > 50 && min <=55) gettJson(51,55);
+if(min > 55 && min <=60) gettJson(56,60);
 
 //reibe datos json
-function gettJsonVideo(group){
+function gettJson(nin1,nin2){
 
-    const requestURL = `https://raw.githubusercontent.com/ChristianRenovell/CanariasLife_Publicidad/Christian/groups/${group}.json`;
-    const request = new XMLHttpRequest();
-    request.open('GET', requestURL);
-    request.responseType = 'json';
-    request.send();
-
-    request.onload = function() {
-        const jsonData = request.response;
-        createVideo(jsonData) 
-      }
+  console.log(nin1,nin2, "esto llega al metodo")
+  var requestOptions = {
+    method: 'POST',
+    redirect: 'follow'
+  };
+  
+  fetch(`http://localhost:3000/list/${nin1}/${nin2}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result,"resultado");
+      createVideo(result);
+    })
+    .catch(error => console.log('error', error));
+    
 }
 
 //crea el banner
 function createVideo(data) {
 
+        let dataJ = JSON.parse(data)
         //nombra al benner que se mostrara
         let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
-        let tag = document.querySelector("iframe"); 
-
-        tag.setAttribute("src", data[number].video);
+        let tag = document.querySelector("iframe");
+        
+        tag.setAttribute("src", dataJ[number].video);
 
         loggerVideo(data[number].id);
-     
 }
-//almacenamos la visualizacion de video para el informe
-function loggerVideo(id) {
+//almacenamos la visualización del Banner para el informe
+function loggerBanner(id){
 
-
+  console.log(id,"ide que voy a registrar")
 
 }
