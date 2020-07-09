@@ -49,8 +49,6 @@ function createBanner(data) {
 //almacenamos la visualización del Banner para el informe
 function loggerBanner(id) {
 
-  var formData = new FormData();
-
   var requestOptions = {
     method: 'POST',
     redirect: 'follow',

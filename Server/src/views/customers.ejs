@@ -22,8 +22,8 @@
                 <td><%= data[i].banner %></td>
                 <td><%= data[i].video %></td>
                 <td>
-                  <a href="/update/<%= data[i].id %>" class="btn btn-info">Edit</a>
-                  <a href="/report/<%= data[i].id %>" class="btn btn-info">Informe</a>
+                  <a href="/update/<%= data[i].id %>/<%= value %>/<%= value2 %>" class="btn btn-info">Edit</a>
+                  <a href="/report/<%= data[i].id %>/<%= data[i].name %>" class="btn btn-info">Informe</a>
                 </td>
               </tr>
             <% } %>

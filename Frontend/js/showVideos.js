@@ -43,12 +43,13 @@ function createVideo(data) {
 
   tag.setAttribute("src", dataJ[number].video);
 
-  loggerVideo(data[number].id);
+ 
+  loggerVideo(dataJ[number].id);
 }
 //almacenamos la visualización del Banner para el informe
 function loggerVideo(id) {
 
-  var formData = new FormData();
+  console.log(id, "esto llega al loggerVideo")
 
   var requestOptions = {
     method: 'POST',

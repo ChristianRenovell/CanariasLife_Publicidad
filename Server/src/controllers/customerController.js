@@ -8,25 +8,35 @@ controller.index = (req, res) => {
 //muestra los componentes de un --grupo
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.id} AND ${req.params.id2};`, (err, customers) => {
+    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
      if (err) {
       res.json(err);
      }
      res.render('customers', {
-        data: customers
-     });
+                              data: customers,
+                              value: req.params.value,
+                              value2: req.params.value2
+                              });
     });
   });
 };
 
 //muestra los registros del historial
 controller.report = (req, res) => {
-  const { id } = req.params;
+  let dataBanner;
+  let dataVideo;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM historyBanner WHERE id = ?", [id], (err, dataHistory) => {
-      res.render('reports', {
-        data: dataHistory
-      })
+    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, dataHistoryBanner) => {
+      dataBanner =   dataHistoryBanner ;
+    });
+
+    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, dataHistoryVideo) => {
+      dataVideo =  dataHistoryVideo ;
+        res.render('reports',{
+          dataBanner,
+          dataVideo,
+          name : req.params.name
+        })
     });
   });
 };
@@ -113,7 +123,9 @@ controller.edit = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM clientes WHERE id = ?", [id], (err, rows) => {
       res.render('customers_edit', {
-        data: rows[0]
+        data: rows[0],
+        value: req.params.value,
+        value2: req.params.value2
       })
     });
   });
@@ -125,7 +137,7 @@ controller.update = (req, res) => {
   req.getConnection((err, conn) => {
 
   conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
-    res.redirect('/list');
+    res.redirect(`/list/${req.params.value}/${req.params.value2}`);
   });
   });
 };
