@@ -4,6 +4,7 @@ let path = require("path");
 let ejs = require("ejs");
 const { Console } = require('console');
 
+let dataBanner = [];
 controller.reportPDF = (req, res) => {
   var content;
  
@@ -44,18 +45,10 @@ controller.reportPDF = (req, res) => {
                 }
             });
         }
-      });
-
-      
+      });   
     });
   });
-
-
-
-
 };
-
-
 //pagina principal
 controller.index = (req, res) => {
   res.render('index');
@@ -93,7 +86,6 @@ controller.report = (req, res) => {
         dataVideo,
         name: req.params.name,
         id: req.params.id
-
       })
     });
   });
