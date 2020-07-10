@@ -13,7 +13,7 @@ router.post('/add', customerController.save);
 router.get('/update/:id/:value/:value2', customerController.edit);
 router.post('/update/:id/:value/:value2', customerController.update);
 router.get('/delete/:id', customerController.delete);
-router.get('/reportpdf/:id/:name', customerController.reportPDF);
+router.get('/reportpdfBanner/:id/:name', customerController.reportPDFBanner);
 
 module.exports = router;
 

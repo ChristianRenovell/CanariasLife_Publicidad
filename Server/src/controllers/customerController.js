@@ -5,36 +5,34 @@ let ejs = require("ejs");
 const { Console } = require('console');
 
 let dataBanner = [];
-controller.reportPDF = (req, res) => {
+controller.reportPDFBanner = (req, res) => {
   var content;
- 
+
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, historyBanner) => {
       if (err) {
         res.json(err);
       }
       content = historyBanner;
-
-      ejs.renderFile(path.join(__dirname, '../views/', "report-template.ejs"), {
-   
+      ejs.renderFile(path.join(__dirname, '../views/', "report-Banner.ejs"), {
         dataBanner: content,
         name: req.params.name
-        
-    }, (err, data) => {
+
+      }, (err, data) => {
         if (err) {
-         
-            res.send(err);
+
+          res.send(err);
         } else {
-            pdf.create(data).toFile("report.pdf", function (err, data) {
-                if (err) {
-                  console.log("pete al crear pdf")
-                    res.send(err);
-                } else {
-                    res.send("File created successfully");
-                }
-            });
+          pdf.create(data).toFile("report.pdf", function (err, data) {
+            if (err) {
+              console.log("pete al crear pdf")
+              res.send(err);
+            } else {
+              res.send("File created successfully");
+            }
+          });
         }
-      });   
+      });
     });
   });
 };
