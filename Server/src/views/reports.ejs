@@ -1,39 +1,40 @@
 <% include partials/_header %>
+
 <div class="container-fluid m-5">
     <div class="row">
         <div class="col-lg-12">
-           <h1 class=""><%= name %></h1>
+            <h1 class=""><%= name %></h1>
             <div class="row">
                 <div class="col-lg-6">
                     <h2>Historial del Banner</h2>
                     <% if (dataBanner) { %>
-                        <% for(var i = 0; i < dataBanner.length; i++) { %>
-                        <tr>
-                            <td><%= dataBanner[i].date %></td>
-                            <td>
-                            </td>
-                        </tr>
-                        <% } %>
+                    <% for(var i = 0; i < dataBanner.length; i++) { %>
+                    <tr>
+                        <td><%= dataBanner[i].date %></td>
+                        <td>
+                        </td>
+                    </tr>
                     <% } %>
-                    <a href="" class="btn btn-info">Generar PDF</a>
+                    <% } %>
+                    <a href="/reportpdf/1" class="btn btn-info">pdf</a>
                 </div>
                 <div class="col-lg-6">
                     <h2>Historial del Video</h2>
                     <% if (dataVideo) { %>
-                        <% for(var i = 0; i < dataVideo.length; i++) { %>
-                        <tr>
-                            <td><%= dataVideo[i].date %></td>
-                        </tr>
-                        <% } %>
+                    <% for(var i = 0; i < dataVideo.length; i++) { %>
+                    <tr>
+                        <td><%= dataVideo[i].date %></td>
+                    </tr>
                     <% } %>
-                    <a href="" class="btn btn-info">Generar PDF</a>
+                    <% } %>
+                    <a href="/reportpdf/<%= id %>" class="btn btn-info" id="testButton">Generar PDF</a>
                 </div>
             </div>
             <div>
-                
             </div>
         </div>
     </div>
-
+    <script>
+    </script>
 </div>
 <% include partials/_footer %>

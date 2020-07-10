@@ -1,4 +1,60 @@
 const controller = {};
+const pdf = require('html-pdf');
+let path = require("path");
+let ejs = require("ejs");
+const { Console } = require('console');
+
+controller.reportPDF = (req, res) => {
+  var content;
+ 
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, historyBanner) => {
+      if (err) {
+        res.json(err);
+      }
+      content = historyBanner;
+
+      ejs.renderFile(path.join(__dirname, '../views/', "report-template.ejs"), {
+   
+        dataBanner: content
+       
+    }, (err, data) => {
+        if (err) {
+         
+            res.send(err);
+        } else {
+            let options = {
+                "height": "11.25in",
+                "width": "8.5in",
+                "header": {
+                    "height": "20mm",
+                },
+                "footer": {
+                    "height": "20mm",
+                },
+    
+            };
+          
+            pdf.create(data, options).toFile("report.pdf", function (err, data) {
+                if (err) {
+                  console.log("pete al crear pdf")
+                    res.send(err);
+                } else {
+                    res.send("File created successfully");
+                }
+            });
+        }
+      });
+
+      
+    });
+  });
+
+
+
+
+};
+
 
 //pagina principal
 controller.index = (req, res) => {
@@ -9,14 +65,14 @@ controller.index = (req, res) => {
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
-     if (err) {
-      res.json(err);
-     }
-     res.render('customers', {
-                              data: customers,
-                              value: req.params.value,
-                              value2: req.params.value2
-                              });
+      if (err) {
+        res.json(err);
+      }
+      res.render('customers', {
+        data: customers,
+        value: req.params.value,
+        value2: req.params.value2
+      });
     });
   });
 };
@@ -27,16 +83,18 @@ controller.report = (req, res) => {
   let dataVideo;
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, dataHistoryBanner) => {
-      dataBanner =   dataHistoryBanner ;
+      dataBanner = dataHistoryBanner;
     });
 
     conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, dataHistoryVideo) => {
-      dataVideo =  dataHistoryVideo ;
-        res.render('reports',{
-          dataBanner,
-          dataVideo,
-          name : req.params.name
-        })
+      dataVideo = dataHistoryVideo;
+      res.render('reports', {
+        dataBanner,
+        dataVideo,
+        name: req.params.name,
+        id: req.params.id
+
+      })
     });
   });
 };
@@ -46,10 +104,10 @@ controller.report = (req, res) => {
 controller.listData = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.nm1} AND ${req.params.nm2};`, (err, customers) => {
-     if (err) {
-      res.json(err);
-     }
-     res.json(customers);
+      if (err) {
+        res.json(err);
+      }
+      res.json(customers);
     });
   });
 };
@@ -62,20 +120,20 @@ controller.loggerBanner = (req, res) => {
   let day = date.getDate()
   let month = date.getMonth() + 1
   let year = date.getFullYear()
-  let hora = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-  
+  let hora = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
   now = `${year}-${month}-${day}`;
-  
-  let grupDateHours = now+' '+hora;
+
+  let grupDateHours = now + ' ' + hora;
 
   req.getConnection((err, conn) => {
     //INSERT INTO history (`id` , `dataBanner`) VALUES ( '2' , '2020-07-07 18:19:00')
     conn.query(`INSERT INTO historyBanner ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
       if (err) {
-       res.json(err);
+        res.json(err);
       }
       console.log("guardado")
-     });
+    });
   })
 };
 
@@ -88,20 +146,20 @@ controller.loggerVideo = (req, res) => {
   let day = date.getDate()
   let month = date.getMonth() + 1
   let year = date.getFullYear()
-  let hora = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
-  
+  let hora = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
   now = `${year}-${month}-${day}`;
-  
-  let grupDateHours = now+' '+hora;
+
+  let grupDateHours = now + ' ' + hora;
 
   req.getConnection((err, conn) => {
-   
+
     conn.query(`INSERT INTO historyVideo ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
       if (err) {
-       res.json(err);
+        res.json(err);
       }
       console.log("guardado")
-     });
+    });
   })
 };
 
@@ -136,9 +194,9 @@ controller.update = (req, res) => {
   const newCustomer = req.body;
   req.getConnection((err, conn) => {
 
-  conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
-    res.redirect(`/list/${req.params.value}/${req.params.value2}`);
-  });
+    conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
+      res.redirect(`/list/${req.params.value}/${req.params.value2}`);
+    });
   });
 };
 
