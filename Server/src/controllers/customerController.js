@@ -17,26 +17,15 @@ controller.reportPDF = (req, res) => {
 
       ejs.renderFile(path.join(__dirname, '../views/', "report-template.ejs"), {
    
-        dataBanner: content
-       
+        dataBanner: content,
+        name: req.params.name
+        
     }, (err, data) => {
         if (err) {
          
             res.send(err);
         } else {
-            let options = {
-                "height": "11.25in",
-                "width": "8.5in",
-                "header": {
-                    "height": "20mm",
-                },
-                "footer": {
-                    "height": "20mm",
-                },
-    
-            };
-          
-            pdf.create(data, options).toFile("report.pdf", function (err, data) {
+            pdf.create(data).toFile("report.pdf", function (err, data) {
                 if (err) {
                   console.log("pete al crear pdf")
                     res.send(err);

@@ -14,7 +14,7 @@ table, th, td {
 <body>
 <div style="width: 85%; margin: 0 7.5%;">
 	<div style="text-align: center; padding-left: 50px;">
-	<h3>Student Report</h5>
+	<h1><%= name %></h1>
 	<center>
 	<table style="text-allign : center">
 		<% if (dataBanner.length > 0) { %>
@@ -22,6 +22,7 @@ table, th, td {
 				<tr><td><%= dataB.id %></td><td><%= dataB.date %></td></td></tr>
 		<%	});%>
 		<% }%>
+		<h2>Total visualizaciones del banner: <%= dataBanner.length %></h2>
 	</table>	
 	</center>
 	</div>
