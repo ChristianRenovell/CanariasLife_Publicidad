@@ -4,8 +4,9 @@ const express = require('express'),
       mysql = require('mysql'),
       myConnection = require('express-myconnection'),
       cors = require('cors'),
-      bodyParser = require('body-parser');
-     
+      bodyParser = require('body-parser'),
+      historypromoters = require('./historyPromoters');
+    
      
 
 const app = express();
@@ -38,6 +39,8 @@ app.use('/', customerRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // starting the server
 app.listen(app.get('port'), () => {

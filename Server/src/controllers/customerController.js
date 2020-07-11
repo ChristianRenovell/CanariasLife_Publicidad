@@ -3,9 +3,41 @@ const pdf = require('html-pdf');
 const path = require("path");
 const ejs = require("ejs");
 
+controller.historypromoters = (req, res) => {
+  console.log("entro en el metodo")
+  req.getConnection((err, conn) => {
+    conn.query(`SELECT id name FROM clientes`, (err, customers) => {
+      if (err) {
+        res.json(err);
+      }
+      //capturamos la fecha
+      let f = new Date();
+      let dateFull = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
+
+      //almacenamos en la tabla promotores.
+      conn.query(`INSERT INTO historypromoters ( id , name, date)  VALUES ('${customers.id}','${customers.name}','${dateFull}')`, (err) => {
+        if (err) {
+          res.json(err);
+        }
+        console.log("registro realizado")
+      });
+    });
+  });
+}
+
+
 //pagina principal
 controller.index = (req, res) => {
-  res.render('index');
+  req.getConnection((err, conn) => {
+    conn.query(`SELECT * FROM clientes`, (err, customers) => {
+      if (err) {
+        res.json(err);
+      }
+      res.render('index', {
+        data: customers,
+      });
+    });
+  });
 };
 
 //muestra los componentes de un grupo.
@@ -133,6 +165,7 @@ controller.loggerBanner = (req, res) => {
   let grupDateHours = now + ' ' + hora;
 
   req.getConnection((err, conn) => {
+    //INSERT INTO history (`id` , `dataBanner`) VALUES ( '2' , '2020-07-07 18:19:00')
     conn.query(`INSERT INTO historyBanner ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
       if (err) {
         res.json(err);

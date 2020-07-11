@@ -1,19 +1,273 @@
 <% include partials/_header %>
-
+<style>
+   
+</style>
 <div class="container mt-5 text-center">
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=1%>/<%=5%>">Grupo 1</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=6%>/<%=10%>">Grupo 2</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=11%>/<%=15%>">Grupo 3</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=16%>/<%=20%>">Grupo 4</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=21%>/<%=25%>">Grupo 5</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=26%>/<%=30%>">Grupo 6</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=31%>/<%=35%>">Grupo 7</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=36%>/<%=40%>">Grupo 8</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=41%>/<%=45%>">Grupo 9</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=46%>/<%=50%>">Grupo 10</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=51%>/<%=55%>">Grupo 11</a>
-    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=56%>/<%=60%>">Grupo 12</a>
-    
+    <a type="button" class="btn btn-outline-primary btn-block " href="/list/<%=1%>/<%=5%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 1
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[0].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[1].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[2].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[3].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[4].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=6%>/<%=10%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 2
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[5].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[6].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[7].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[8].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[9].name %>
+            </div>
+        </div>    
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=11%>/<%=15%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 3
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[10].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[11].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[12].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[13].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[14].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=16%>/<%=20%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 4
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[15].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[16].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[17].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[18].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[19].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=21%>/<%=25%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 5
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[20].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[21].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[22].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[23].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[24].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=26%>/<%=30%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 6
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[25].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[26].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[27].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[28].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[29].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=31%>/<%=35%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 7
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[30].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[31].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[32].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[33].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[34].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=36%>/<%=40%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 8
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[35].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[36].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[37].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[38].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[39].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=41%>/<%=45%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 9
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[40].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[41].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[42].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[43].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[44].name %>
+            </div>
+        </div>
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=46%>/<%=50%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 10
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[45].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[46].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[47].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[48].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[49].name %>
+            </div>
+        </div>    
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=51%>/<%=55%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 11
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[50].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[51].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[52].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[53].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[54].name %>
+            </div>
+        </div>    
+    </a>
+    <a type="button" class="btn btn-outline-primary btn-block" href="/list/<%=56%>/<%=60%>">
+        <div class="row">
+            <div class="col-md-4 col-lg-2 font-weight-bold">
+                GRUPO 12
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[55].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[56].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[57].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[58].name %>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <%= data[59].name %>
+            </div>
+        </div>    
+    </a>
+
 </div>
 
 <% include partials/_footer %>
