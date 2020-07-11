@@ -5,8 +5,8 @@
     <div class="row text-center">
         <div class="col-lg-6">
             <h2 class="text-primary">Historial del Banner</h2>
-            <a href="/reportpdfBanner/<%= id %>/<%= name %>" class="btn btn-danger mt-3 mb-3 btn-block">Generar pdf</a>
-
+            <a href="/reportpdfBanner/<%= id %>/<%= name %>" class="btn btn-outline-danger mt-3 mb-3 btn-block">Generar pdf</a>
+            
             <% if (dataBanner) { %>
             <% for(var i = 0; i < dataBanner.length; i++) { %>
             <tr>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-6">
             <h2 class="text-primary">Historial del Video</h2>
-            <a href="/reportpdfVideo/<%= id %>/<%= name %>" class="btn btn-danger mt-3 mb-3 btn-block" id="testButton">Generar PDF</a>
+            <a href="/reportpdfVideo/<%= id %>/<%= name %>" class="btn btn-outline-danger mt-3 mb-3 btn-block" id="testButton">Generar PDF</a>
             <% if (dataVideo) { %>
             <% for(var i = 0; i < dataVideo.length; i++) { %>
             <tr>
