@@ -1,40 +1,38 @@
 <% include partials/_header %>
 
-<div class="container-fluid mt-5">
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <td>id</td>
-            <td>Nombre</td>
-            <td>banner</td>
-            <td>video</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (data) { %>
-            <% for(var i = 0; i < data.length; i++) { %>
-              <tr>
-                <td><%= data[i].id %></td>
-                <td><%= data[i].name %></td>
-                <td><%= data[i].banner %></td>
-                <td><%= data[i].video %></td>
-                <td>
-                  <a href="/update/<%= data[i].id %>/<%= value %>/<%= value2 %>" class="btn btn-info">Edit</a>
-                  <a href="/report/<%= data[i].id %>/<%= data[i].name %>" class="btn btn-info">Informe</a>
-                </td>
-              </tr>
-            <% } %>
-          <% } %>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      </div>
-    </div>
+<div class="container-fluid mt-5 text-center">
+  <h1 class="mb-4">GRUPO 1</h1>
+  <table class="table table-bordered">
+    <thead class="font-weight-bold">
+      <tr>
+        <td>ID</td>
+        <td>NOMBRE</td>
+        <td>BANNER</td>
+        <td>VIDEO</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) { %>
+      <% for(var i = 0; i < data.length; i++) { %>
+      <tr>
+        <td><%= data[i].id %></td>
+        <td><%= data[i].name %></td>
+        <td><%= data[i].banner %></td>
+        <td><%= data[i].video %></td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="/report/<%= data[i].id %>/<%= data[i].name %>" class="btn btn-info ml-2">Informe</a>
+            <a href="/update/<%= data[i].id %>/<%= value %>/<%= value2 %>" class="btn btn-warning">Editar</a>
+          </div>
+        </td>
+      </tr>
+      <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" style="width: 20%;" href="/">Atrás</a>
   </div>
 </div>
 

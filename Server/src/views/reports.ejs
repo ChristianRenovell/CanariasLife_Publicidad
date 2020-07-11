@@ -1,40 +1,37 @@
 <% include partials/_header %>
 
-<div class="container-fluid m-5">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class=""><%= name %></h1>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>Historial del Banner</h2>
-                    <% if (dataBanner) { %>
-                    <% for(var i = 0; i < dataBanner.length; i++) { %>
-                    <tr>
-                        <td><%= dataBanner[i].date %></td>
-                        <td>
-                        </td>
-                    </tr>
-                    <% } %>
-                    <% } %>
-                    <a href="/reportpdfBanner/<%= id %>/<%= name %>" class="btn btn-info">Generar pdf</a>
-                </div>
-                <div class="col-lg-6">
-                    <h2>Historial del Video</h2>
-                    <% if (dataVideo) { %>
-                    <% for(var i = 0; i < dataVideo.length; i++) { %>
-                    <tr>
-                        <td><%= dataVideo[i].date %></td>
-                    </tr>
-                    <% } %>
-                    <% } %>
-                    <a href="/reportpdfVideo/<%= id %>/<%= name %>" class="btn btn-info">Generar pdf</a>
-                </div>
-            </div>
-            <div>
-            </div>
+<div class="container mt-5">
+    <h1 class="text-uppercase mb-4"><%= name %></h1>
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <h2 class="text-primary">Historial del Banner</h2>
+            <a href="/reportpdfBanner/<%= id %>/<%= name %>" class="btn btn-danger mt-3 mb-3 btn-block">Generar pdf</a>
+
+            <% if (dataBanner) { %>
+            <% for(var i = 0; i < dataBanner.length; i++) { %>
+            <tr>
+                <td><%= dataBanner[i].date %></td>
+                <td>
+                </td>
+            </tr>
+            <% } %>
+            <% } %>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="text-primary">Historial del Video</h2>
+            <a href="/reportpdfVideo/<%= id %>/<%= name %>" class="btn btn-danger mt-3 mb-3 btn-block" id="testButton">Generar PDF</a>
+            <% if (dataVideo) { %>
+            <% for(var i = 0; i < dataVideo.length; i++) { %>
+            <tr>
+                <td><%= dataVideo[i].date %></td>
+            </tr>
+            <% } %>
+            <% } %>
+         
         </div>
     </div>
-    <script>
-    </script>
+    <div class="text-center">
+        <a class="btn btn-primary mt-5" style="width: 20%;" href="javascript:history.back()">Atrás</a>
+    </div>
 </div>
 <% include partials/_footer %>

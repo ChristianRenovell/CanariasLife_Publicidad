@@ -1,15 +1,52 @@
 const controller = {};
 const pdf = require('html-pdf');
-let path = require("path");
-let ejs = require("ejs");
-const { Console } = require('console');
+const path = require("path");
+const ejs = require("ejs");
 
-//let dataBanner = [];
-//let dataVideo = [];
+//pagina principal
+controller.index = (req, res) => {
+  res.render('index');
+};
 
+//muestra los componentes de un grupo.
+controller.list = (req, res) => {
+  req.getConnection((err, conn) => {
+    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
+      if (err) {
+        res.json(err);
+      }
+      res.render('customers', {
+        data: customers,
+        value: req.params.value,
+        value2: req.params.value2
+      });
+    });
+  });
+};
+
+//muestra los registros del historial de los videos y los Banners.
+controller.report = (req, res) => {
+  let dataBanner;
+  let dataVideo;
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, dataHistoryBanner) => {
+      dataBanner = dataHistoryBanner;
+    });
+    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, dataHistoryVideo) => {
+      dataVideo = dataHistoryVideo;
+      res.render('reports', {
+        dataBanner,
+        dataVideo,
+        name: req.params.name,
+        id: req.params.id
+      })
+    });
+  });
+};
+
+//Genera Reportes del Historial de las visualizaciones de los videos.
 controller.reportPDFVideo = (req, res) => {
   var content;
-
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, historyVideo) => {
       if (err) {
@@ -19,10 +56,8 @@ controller.reportPDFVideo = (req, res) => {
       ejs.renderFile(path.join(__dirname, '../views/', "report-Video.ejs"), {
         dataVideo: content,
         name: req.params.name
-
       }, (err, data) => {
         if (err) {
-
           res.send(err);
         } else {
           pdf.create(data).toFile("report_Video.pdf", function (err, data) {
@@ -39,9 +74,9 @@ controller.reportPDFVideo = (req, res) => {
   });
 };
 
+//Genera Reportes del Historial de las visualizaciones de los Banners.
 controller.reportPDFBanner = (req, res) => {
   var content;
-
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, historyBanner) => {
       if (err) {
@@ -51,7 +86,6 @@ controller.reportPDFBanner = (req, res) => {
       ejs.renderFile(path.join(__dirname, '../views/', "report-Banner.ejs"), {
         dataBanner: content,
         name: req.params.name
-
       }, (err, data) => {
         if (err) {
 
@@ -67,48 +101,6 @@ controller.reportPDFBanner = (req, res) => {
           });
         }
       });
-    });
-  });
-};
-
-//pagina principal
-controller.index = (req, res) => {
-  res.render('index');
-};
-
-//muestra los componentes de un --grupo
-controller.list = (req, res) => {
-  req.getConnection((err, conn) => {
-    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
-      if (err) {
-        res.json(err);
-      }
-      res.render('customers', {
-        data: customers,
-        value: req.params.value,
-        value2: req.params.value2
-      });
-    });
-  });
-};
-
-//muestra los registros del historial
-controller.report = (req, res) => {
-  let dataBanner;
-  let dataVideo;
-  req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, dataHistoryBanner) => {
-      dataBanner = dataHistoryBanner;
-    });
-
-    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, dataHistoryVideo) => {
-      dataVideo = dataHistoryVideo;
-      res.render('reports', {
-        dataBanner,
-        dataVideo,
-        name: req.params.name,
-        id: req.params.id
-      })
     });
   });
 };
@@ -141,7 +133,6 @@ controller.loggerBanner = (req, res) => {
   let grupDateHours = now + ' ' + hora;
 
   req.getConnection((err, conn) => {
-    //INSERT INTO history (`id` , `dataBanner`) VALUES ( '2' , '2020-07-07 18:19:00')
     conn.query(`INSERT INTO historyBanner ( id , date)  VALUES ('${req.params.id}','${grupDateHours}')`, (err) => {
       if (err) {
         res.json(err);

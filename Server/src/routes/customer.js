@@ -4,8 +4,8 @@ const router = require('express').Router();
 const customerController = require('../controllers/customerController');
 
 router.get('/', customerController.index);
-router.get('/report/:id/:name', customerController.report);
 router.get('/list/:value/:value2', customerController.list);
+router.get('/report/:id/:name', customerController.report);
 router.post('/list/:nm1/:nm2', customerController.listData);
 router.post('/loggerBanner/:id', customerController.loggerBanner);
 router.post('/loggerVideo/:id', customerController.loggerVideo);
