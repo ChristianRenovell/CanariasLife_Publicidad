@@ -4,7 +4,41 @@ let path = require("path");
 let ejs = require("ejs");
 const { Console } = require('console');
 
-let dataBanner = [];
+//let dataBanner = [];
+//let dataVideo = [];
+
+controller.reportPDFVideo = (req, res) => {
+  var content;
+
+  req.getConnection((err, conn) => {
+    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, historyVideo) => {
+      if (err) {
+        res.json(err);
+      }
+      content = historyVideo;
+      ejs.renderFile(path.join(__dirname, '../views/', "report-Video.ejs"), {
+        dataVideo: content,
+        name: req.params.name
+
+      }, (err, data) => {
+        if (err) {
+
+          res.send(err);
+        } else {
+          pdf.create(data).toFile("report_Video.pdf", function (err, data) {
+            if (err) {
+              res.send(err);
+            } else {
+              var file = path.join(__dirname, '../../', "report_Video.pdf");
+              res.download(file);
+            }
+          });
+        }
+      });
+    });
+  });
+};
+
 controller.reportPDFBanner = (req, res) => {
   var content;
 
@@ -23,12 +57,12 @@ controller.reportPDFBanner = (req, res) => {
 
           res.send(err);
         } else {
-          pdf.create(data).toFile("report.pdf", function (err, data) {
+          pdf.create(data).toFile("report_Banner.pdf", function (err, data) {
             if (err) {
-              console.log("pete al crear pdf")
               res.send(err);
             } else {
-              res.send("File created successfully");
+              var file = path.join(__dirname, '../../', "report_Banner.pdf");
+              res.download(file);
             }
           });
         }
@@ -36,6 +70,7 @@ controller.reportPDFBanner = (req, res) => {
     });
   });
 };
+
 //pagina principal
 controller.index = (req, res) => {
   res.render('index');

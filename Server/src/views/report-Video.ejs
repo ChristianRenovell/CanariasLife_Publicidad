@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<div style="width: 85%; margin: 0 7.5%;">
+	<div style="text-align: center; padding-left: 50px;">
+	<h1><%= name %></h1>
+	<center>
+	<table style="text-allign : center">
+		<% if (dataVideo.length > 0) { %>
+			<% dataVideo.forEach(dataV => {%>
+				<tr><td><%= dataV.id %></td><td><%= dataV.date %></td></td></tr>
+		<%	});%>
+		<% }%>
+		<h2>Total visualizaciones de los Videos: <%= dataVideo.length %></h2>
+	</table>	
+	</center>
+	</div>
+</div>
+</body>
+</html>
