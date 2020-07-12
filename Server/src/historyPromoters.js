@@ -26,7 +26,7 @@ function getDate() {
 //Recibe los promotores activos.
 function querrysGett() {
     return new Promise(async function (resolve, reject) {
-        var query = await connection.query('SELECT id, name FROM clientes', function (err, rows) {
+        var query = await connection.query('SELECT * FROM `promoters` WHERE name != ""', function (err, rows) {
             if (err) {
                 return reject(err)
             }
@@ -38,6 +38,7 @@ function querrysGett() {
 function querrysSett(result) {
     return new Promise(async function (resolve, reject) {
         grupDateHours = getDate();
+        console.log(`INSERT INTO historypromoters ( id, name, date)  VALUES ('${result[0].id}','${result[0].name}','${grupDateHours})`)
         for (let y = 0; y <= result.length; y++) {
             var query2 = await connection.query(`INSERT INTO historypromoters ( id, name, date)  VALUES ('${result[y].id}','${result[y].name}','${grupDateHours}')`, function (error, result2) {
                 if (error) {
@@ -56,8 +57,8 @@ function querrysSett(result) {
 horas(0-23)
 día del mes(0-31)
 mes(0-12 o nombres)
-día de la semana (0-7, 7 es Domingo, o nombres)*/
-new CronJob('00 13 * * 1', function() {
+día de la semana (0-7, 0 es Domingo, o nombres)*/
+new CronJob('00 12 * * 1', function() {
  
     connection.connect( function (error) {
         if (error) {
