@@ -6,9 +6,8 @@ const express = require('express'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
       historypromoters = require('./historyPromoters');
-    
-     
 
+    
 const app = express();
 
 // importing routes
@@ -39,8 +38,6 @@ app.use('/', customerRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 // starting the server
 app.listen(app.get('port'), () => {

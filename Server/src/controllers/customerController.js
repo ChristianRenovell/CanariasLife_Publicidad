@@ -178,19 +178,7 @@ controller.loggerVideo = (req, res) => {
   })
 };
 
-
-
-controller.save = (req, res) => {
-  const data = req.body;
-  console.log(req.body)
-  req.getConnection((err, connection) => {
-    const query = connection.query('INSERT INTO promoters set ?', data, (err, customer) => {
-      console.log(customer)
-      res.redirect('/');
-    })
-  })
-};
-
+//Redirecciona a la vista de editar promotor
 controller.edit = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, conn) => {
@@ -204,18 +192,31 @@ controller.edit = (req, res) => {
   });
 };
 
+//Actualiza los cambios echos en el promotor
 controller.update = (req, res) => {
   const { id } = req.params;
   const newCustomer = req.body;
   req.getConnection((err, conn) => {
-
     conn.query('UPDATE promoters set ? where id = ?', [newCustomer, id], (err, rows) => {
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
   });
 };
 
-controller.delete = (req, res) => {
+
+controller.clear = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+
+    console.log(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`)
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`, (err, rows) => {
+      res.redirect(`/list/${req.params.value}/${req.params.value2}`);
+    });
+  });
+}
+
+//elimina registro-------
+/*controller.delete = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query('DELETE FROM promoters WHERE id = ?', [id], (err, rows) => {
@@ -223,5 +224,16 @@ controller.delete = (req, res) => {
     });
   });
 }
+
+/*controller.save = (req, res) => {
+  const data = req.body;
+  console.log(req.body)
+  req.getConnection((err, connection) => {
+    const query = connection.query('INSERT INTO promoters set ?', data, (err, customer) => {
+      console.log(customer)
+      res.redirect('/');
+    })
+  })
+};*/
 
 module.exports = controller;
