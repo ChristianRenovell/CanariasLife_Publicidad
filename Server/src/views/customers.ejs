@@ -22,6 +22,7 @@
         <td><%= data[i].video %></td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
+            <% if (data[i].name ==""){data[i].name="Promotor sin nombre."}%>
             <a href="/report/<%= data[i].id %>/<%= data[i].name %>" class="btn btn-info ml-2">Informe</a>
             <a href="/update/<%= data[i].id %>/<%= value %>/<%= value2 %>" class="btn btn-warning">Editar</a>
           </div>

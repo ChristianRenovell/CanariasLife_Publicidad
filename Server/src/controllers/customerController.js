@@ -3,33 +3,10 @@ const pdf = require('html-pdf');
 const path = require("path");
 const ejs = require("ejs");
 
-controller.historypromoters = (req, res) => {
-  console.log("entro en el metodo")
-  req.getConnection((err, conn) => {
-    conn.query(`SELECT id name FROM clientes`, (err, customers) => {
-      if (err) {
-        res.json(err);
-      }
-      //capturamos la fecha
-      let f = new Date();
-      let dateFull = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
-
-      //almacenamos en la tabla promotores.
-      conn.query(`INSERT INTO historypromoters ( id , name, date)  VALUES ('${customers.id}','${customers.name}','${dateFull}')`, (err) => {
-        if (err) {
-          res.json(err);
-        }
-        console.log("registro realizado")
-      });
-    });
-  });
-}
-
-
 //pagina principal
 controller.index = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query(`SELECT * FROM clientes`, (err, customers) => {
+    conn.query(`SELECT * FROM promoters`, (err, customers) => {
       if (err) {
         res.json(err);
       }
@@ -43,7 +20,7 @@ controller.index = (req, res) => {
 //muestra los componentes de un grupo.
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
+    conn.query(`SELECT * FROM promoters where id BETWEEN ${req.params.value} AND ${req.params.value2};`, (err, customers) => {
       if (err) {
         res.json(err);
       }
@@ -141,7 +118,7 @@ controller.reportPDFBanner = (req, res) => {
 //devuelve los 5 clientes de la franja horaria para mostrarlos en el frontend
 controller.listData = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query(`SELECT * FROM clientes where id BETWEEN ${req.params.nm1} AND ${req.params.nm2};`, (err, customers) => {
+    conn.query(`SELECT * FROM promoters where id BETWEEN ${req.params.nm1} AND ${req.params.nm2};`, (err, customers) => {
       if (err) {
         res.json(err);
       }
@@ -207,7 +184,7 @@ controller.save = (req, res) => {
   const data = req.body;
   console.log(req.body)
   req.getConnection((err, connection) => {
-    const query = connection.query('INSERT INTO clientes set ?', data, (err, customer) => {
+    const query = connection.query('INSERT INTO promoters set ?', data, (err, customer) => {
       console.log(customer)
       res.redirect('/');
     })
@@ -217,7 +194,7 @@ controller.save = (req, res) => {
 controller.edit = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM clientes WHERE id = ?", [id], (err, rows) => {
+    conn.query("SELECT * FROM promoters WHERE id = ?", [id], (err, rows) => {
       res.render('customers_edit', {
         data: rows[0],
         value: req.params.value,
@@ -232,7 +209,7 @@ controller.update = (req, res) => {
   const newCustomer = req.body;
   req.getConnection((err, conn) => {
 
-    conn.query('UPDATE clientes set ? where id = ?', [newCustomer, id], (err, rows) => {
+    conn.query('UPDATE promoters set ? where id = ?', [newCustomer, id], (err, rows) => {
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
   });
@@ -241,7 +218,7 @@ controller.update = (req, res) => {
 controller.delete = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query('DELETE FROM clientes WHERE id = ?', [id], (err, rows) => {
+    connection.query('DELETE FROM promoters WHERE id = ?', [id], (err, rows) => {
       res.redirect('/');
     });
   });
