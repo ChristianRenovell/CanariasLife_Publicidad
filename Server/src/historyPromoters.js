@@ -58,7 +58,7 @@ horas(0-23)
 día del mes(0-31)
 mes(0-12 o nombres)
 día de la semana (0-7, 0 es Domingo, o nombres)*/
-new CronJob('00 12 * * 1', function() {
+new CronJob('45 20 * * 1', function() {
  
     connection.connect( function (error) {
         if (error) {

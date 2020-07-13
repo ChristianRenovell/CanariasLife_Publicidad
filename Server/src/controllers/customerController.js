@@ -207,8 +207,6 @@ controller.update = (req, res) => {
 controller.clear = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
-
-    console.log(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`)
     connection.query(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`, (err, rows) => {
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
