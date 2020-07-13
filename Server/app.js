@@ -5,18 +5,18 @@ const express = require('express'),
       myConnection = require('express-myconnection'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
-      historypromoters = require('./historyPromoters');
+      historypromoters = require('./src/historyPromoters');
 
     
 const app = express();
 
 // importing routes
-const customerRoutes = require('./routes/customer');
+const customerRoutes = require('./src/routes/customer');
 
 // settings
 app.use(cors());
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
 
