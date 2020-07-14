@@ -1,6 +1,18 @@
 <% include partials/_header %>
+<% if(value==1){ grup = 1} %>
+<% if(value==6){ grup = 2} %>
+<% if(value==11){ grup = 3} %>
+<% if(value==16){ grup = 4} %>
+<% if(value==21){ grup = 5} %>
+<% if(value==26){ grup = 6} %>
+<% if(value==31){ grup = 7} %>
+<% if(value==36){ grup = 8} %>
+<% if(value==41){ grup = 9} %>
+<% if(value==46){ grup = 10} %>
+<% if(value==51){ grup = 11} %>
+<% if(value==56){ grup = 12} %>
 <div class="container-fluid mt-5 text-center">
-  <h1 class="mb-4">GRUPO 1</h1>
+  <h1 class="mb-4">GRUPO <%= grup %></h1>
   <table class="table table-bordered">
     <thead class="font-weight-bold">
       <tr>
