@@ -208,6 +208,13 @@ controller.clear = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`, (err, rows) => {
+     console.log("posicion sin datos de promotor")
+    });
+    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) =>{
+      console.log("eliminado historial banner")
+    });
+    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) =>{
+      console.log("eliminado historial videos")
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
   });

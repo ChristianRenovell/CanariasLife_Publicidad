@@ -23,6 +23,28 @@
             <button type="submit" class="btn btn-success btn-block">
               Actualizar
             </button>
+            <main>
+              <input id="mostrar-modal" type="radio" name="modal"/>
+              <label for="mostrar-modal" class="btn btn-danger">Eliminar</label>
+              <input id="cerrar-modal" type="radio" name="modal"/>            
+              <div id="modal">
+                  <div class="bodyNodal">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <h3 class="card-title">Eliminar promotor.</h3>
+                            <hr> 
+                            <p class="card-text">Esta apunto de eliminar a un Promotor.</p> 
+                            <p class="card-text">Se eliminara su historial de visualizaciones.</p>                           
+                            <label for="cerrar-modal" class="btn btn-primary">Cancelar</label>                         
+                            <label for="cerrar-modal"><a href="/clear/<%= data.id %>/<%= value %>/<%= value2 %>" class="btn btn-danger btn-block">Eliminar</a></label>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </main>
             </div>
           </div>
         </form>
@@ -30,5 +52,83 @@
     </div>
   </div>
 </div>
-
+            <!--Modal css alerta de eliminar-->
+            <style>
+              body {
+                
+              margin: 0;
+              padding: 0;
+              font-family: sans-serif;
+            }
+            
+            h2 {
+              font-size: 1.1em;
+              margin-top: 2em;
+              text-align: center;
+            }
+            
+            main {
+              width: 80%;
+              margin: auto;
+            }
+            
+            #modal {
+              color: rgb(72, 84, 185);
+              position: fixed;
+              top: -100vh;
+              left: 0;
+              height: 100vh;
+              width: 100vw;
+              transition: all 0.5s;
+            }
+            .bodyNodal {
+              background-color: rgb(255, 255, 255);
+              width: 35%;
+              height: 20%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              margin: auto;
+              font-size: 1.5em;
+              text-align: center;
+            }
+            
+            #mostrar-modal {
+              display: none;
+            }
+          
+            
+            #mostrar-modal:checked ~ #modal {
+              top: 0;
+            }
+            #cerrar-modal {
+              display: none;
+            }
+            #cerrar-modal + label {
+              position: absolute;
+              top: 1em;
+              right: 1em;
+              z-index: 100;
+              color: #fff;
+              font-weight: bold;
+              cursor: pointer;
+              background: tomato;
+              width: 25px;
+              height: 25px;
+              line-height: 25px;
+              text-align: center;
+              border-radius: 50%;
+              display: none;
+              transition: all 0.5s;
+            }
+            #cerrar-modal:checked ~ #modal {
+              top: -100vh;
+            }
+            #cerrar-modal:checked + label {
+              display: none;
+            }
+            
+            </style>
 <% include partials/_footer %>
