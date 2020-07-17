@@ -1,8 +1,8 @@
 -- to create a new database
-CREATE DATABASE promotores;
+CREATE DATABASE canariaslife;
 
 -- to use database
-use promotores;
+use canariaslife;
 
 -- creating a new table
 CREATE TABLE promoters (
@@ -27,7 +27,7 @@ CREATE TABLE historyvideo (
 -- creating a new table
 CREATE TABLE historypromoters (
   id INT,
-  name VARCHAR (200)
+  name VARCHAR (200),
   date datetime
 );
 
