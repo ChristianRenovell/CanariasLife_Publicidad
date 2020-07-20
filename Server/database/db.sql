@@ -1,8 +1,8 @@
 -- to create a new database
-CREATE DATABASE promotores;
+CREATE DATABASE canariaslife;
 
 -- to use database
-use promotores;
+use canariaslife;
 
 -- creating a new table
 CREATE TABLE promoters (

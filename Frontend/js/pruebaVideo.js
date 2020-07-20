@@ -1,13 +1,15 @@
 
 let tag = document.querySelector("iframe");
 
+//publicidad
 tag.setAttribute("src","https://www.youtube.com/embed/3WVQ9ugRdjI" );
 
 function mensaje() {
-tag.setAttribute("src","https://www.youtube.com/embed/1bpR-OL7CYQ" );
+    
+document.getElementById("iframePublicidad").style.display = "none";
 }
     
-setTimeout(mensaje,5000);
+setTimeout(mensaje,6000);
 
 window.onload = updateClock;
 var totalTime = 5;

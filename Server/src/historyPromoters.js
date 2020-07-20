@@ -38,7 +38,6 @@ function querrysGett() {
 function querrysSett(result) {
     return new Promise(async function (resolve, reject) {
         grupDateHours = getDate();
-        console.log(`INSERT INTO historypromoters ( id, name, date)  VALUES ('${result[0].id}','${result[0].name}','${grupDateHours})`)
         for (let y = 0; y <= result.length; y++) {
             var query2 = await connection.query(`INSERT INTO historypromoters ( id, name, date)  VALUES ('${result[y].id}','${result[y].name}','${grupDateHours}')`, function (error, result2) {
                 if (error) {

@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    let tag = document.getElementById("iframePubli")
+  
+  tag.setAttribute("src","http://gesbonos.com/publicidad/videos.html" );
+  
+  function change() {
+  tag.setAttribute("src","//www.skylinewebcams.com/webcam/espana/canarias/santa-cruz-de-tenerife/playa-de-las-teresitas.html?w=1105" );
+  }
+    setTimeout(change,6000);
+    
+    window.onload = updateClock;
+  var totalTime = 5;
+  function updateClock() {
+  document.getElementById('countdown').innerHTML = totalTime;
+  if(totalTime==0){
+  
+  let tagCrono = document.getElementById("publi").style.display ="none";
+  
+  }else{
+  totalTime-=1;
+  setTimeout("updateClock()",1000);
+  }
+  }
+    
+    </script>
+  <style type="text/css">
+      .publiDiv{
+          position: relative;
+          top: -60px;
+          left: 1130px;
+          background-color:rgba(29,112,183,0.2);
+          color: cornsilk;
+          width: 120px;
+          height: 33px;
+          text-align: center;
+          font-family: 'Lucida Sans', 'Open Sans',Helvetica,Arial,Lucida,sans-serif;
+          font-size: 1.1em;
+          padding: 5px;
+      }
+      .publiDiv span{
+              position: relative;
+              
+  
+            }
+  
+  </style>
