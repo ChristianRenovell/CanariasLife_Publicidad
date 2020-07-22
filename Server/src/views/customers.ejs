@@ -19,7 +19,9 @@
         <td>ID</td>
         <td>NOMBRE</td>
         <td>BANNER</td>
+        <td>LINK BANNER</td>
         <td>VIDEO</td>
+        <td>LINK VIDEO</td>
         <td></td>
       </tr>
     </thead>
@@ -30,7 +32,9 @@
         <td><%= data[i].id %></td>
         <td><%= data[i].name %></td>
         <td><%= data[i].banner %></td>
+        <td><%= data[i].linkBanner %></td>
         <td><%= data[i].video %></td>
+        <td><%= data[i].linkVideo %></td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example">
            <% if (data[i].name ==""){data[i].name="Promotor sin nombre."}%>

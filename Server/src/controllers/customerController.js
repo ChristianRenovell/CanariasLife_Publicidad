@@ -2,6 +2,7 @@ const controller = {};
 const pdf = require('html-pdf');
 const path = require("path");
 const ejs = require("ejs");
+const { Console } = require('console');
 
 //pagina principal
 controller.index = (req, res) => {
@@ -69,11 +70,11 @@ controller.reportPDFVideo = (req, res) => {
         if (err) {
           res.send(err);
         } else {
-          pdf.create(data).toFile("report_Video.pdf", function (err, data) {
+          pdf.create(data).toFile("src/report_Video.pdf", function (err, data) {
             if (err) {
               res.send(err);
             } else {
-              var file = path.join(__dirname, '../../', "report_Video.pdf");
+              var file = path.join(__dirname, '../', "report_Video.pdf");
               res.download(file);
             }
           });
@@ -100,11 +101,11 @@ controller.reportPDFBanner = (req, res) => {
 
           res.send(err);
         } else {
-          pdf.create(data).toFile("report_Banner.pdf", function (err, data) {
+          pdf.create(data).toFile("src/report_Banner.pdf", function (err, data) {
             if (err) {
               res.send(err);
             } else {
-              var file = path.join(__dirname, '../../', "report_Banner.pdf");
+              var file = path.join(__dirname, '../', "report_Banner.pdf");
               res.download(file);
             }
           });
@@ -195,7 +196,9 @@ controller.edit = (req, res) => {
 //Actualiza los cambios echos en el promotor
 controller.update = (req, res) => {
   const { id } = req.params;
+  console.log()
   const newCustomer = req.body;
+  console.log(req.body);
   req.getConnection((err, conn) => {
     conn.query('UPDATE promoters set ? where id = ?', [newCustomer, id], (err, rows) => {
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);

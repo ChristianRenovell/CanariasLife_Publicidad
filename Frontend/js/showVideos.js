@@ -40,9 +40,10 @@ function createVideo(data) {
   let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
   let tag = document.querySelector("iframe");
+  //let tagA = document.querySelector("a");
 
   tag.setAttribute("src", dataJ[number].video);
-
+  //tagA.setAttribute("href", dataJ[number].linkVideo);
  
   loggerVideo(dataJ[number].id);
 }

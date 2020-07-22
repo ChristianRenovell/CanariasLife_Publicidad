@@ -13,7 +13,13 @@
             <input type="text" name="banner" value="<%= data.banner%>" placeholder="url Banner" class="form-control">
           </div>
           <div class="form-group">
+            <input type="text" name="linkBanner" value="<%= data.linkBanner%>" placeholder="url Banner" class="form-control">
+          </div>
+          <div class="form-group">
             <input type="text" name="video" value="<%= data.video%>" placeholder="url Video" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="text" name="linkVideo" value="<%= data.linkVideo%>" placeholder="url Video" class="form-control">
           </div>
           <div class="row">
             <div class="col-4">
@@ -28,7 +34,6 @@
               <input id="mostrar-modal" type="radio" name="modal" />
               <label for="mostrar-modal" class="btn btn-danger btn-block">Eliminar</label>
               <input id="cerrar-modal" type="radio" name="modal" />
-
               <div id="modal">
                 <div class="bodyNodal">
                   <div class="row">
@@ -41,7 +46,8 @@
                           <p class="card-text">Se eliminara su historial de visualizaciones.</p>
                           <div class="row">
                             <div class=col-6>
-                              <label for="cerrar-modal" class="btn btn-primary btn-block">Cancelar</label>
+                              <button href="javascript:history.back()"
+                                class="btn btn-primary btn-block">Cancelar</button>
                             </div>
                             <div class="col-6">
                               <label for="cerrar-modal" class="btn btn-danger btn-block"><a
@@ -61,3 +67,56 @@
     </div>
   </div>
 </div>
+<!--Modal css alerta de eliminar-->
+<style>
+  #modal {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 0.5s;
+  }
+
+  a:link,
+  a:visited,
+  a:active {
+    text-decoration: none;
+    color: white;
+  }
+
+  .bodyNodal {
+    background-color: rgb(255, 255, 255);
+    width: 35%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  #mostrar-modal {
+    display: none;
+  }
+
+  #mostrar-modal:checked~#modal {
+    top: 0;
+  }
+
+  #cerrar-modal {
+    display: none;
+  }
+
+  #cerrar-modal:checked~#modal {
+    top: -100vh;
+  }
+
+  #cerrar-modal:checked+label {
+    display: none;
+  }
+</style>
+<% include partials/_footer %>

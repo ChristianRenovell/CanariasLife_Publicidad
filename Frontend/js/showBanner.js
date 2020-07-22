@@ -41,8 +41,10 @@ function createBanner(data) {
   let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
   let tag = document.querySelector("img");
+  let tagA = document.querySelector("a");
 
   tag.setAttribute("src", dataJ[number].banner);
+  tagA.setAttribute("href", dataJ[number].linkBanner);
 
   loggerBanner(dataJ[number].id);
 }
