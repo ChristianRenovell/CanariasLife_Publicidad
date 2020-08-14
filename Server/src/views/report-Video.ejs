@@ -15,7 +15,7 @@
                 <% if (dataVideo.length > 0) { %>
                 <% dataVideo.forEach(dataV => {%>
                 <tr>
-                    <td><%= dataV.date %></td>
+                    <td><%= dataV.date.getDay() %>-<%= dataV.date.getMonth() %>-<%= dataV.date.getFullYear() %> <%= dataV.date.getHours() %>:<%= dataV.date.getMinutes() %>:<%= dataV.date.getSeconds() %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>

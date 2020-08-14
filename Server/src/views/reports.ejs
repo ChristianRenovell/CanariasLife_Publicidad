@@ -4,11 +4,11 @@
         <div class="col-lg-6">
             <h1 class="text-uppercase mb-4"><%= nameBanner %></h1>
             <h2 class="text-primary">Historial del Banner</h2>
-            <a href="/reportpdfBanner/<%= id %>/<%= nameBanner %>" class="btn btn-outline-danger mt-3 mb-3 btn-block">Generar pdf</a>
+            <a href="/reportpdfBanner/<%= id %>/<%= nameBanner %>" class="btn btn-outline-danger mt-3 mb-3 btn-block">Generar PDF</a>
             <% if (dataBanner) { %>
             <% for(var i = 0; i < dataBanner.length; i++) { %>
             <tr>
-                <td><%= dataBanner[i].date %></td>
+                <td><%= dataBanner[i].date.getDay() %>-<%= dataBanner[i].date.getMonth() %>-<%= dataBanner[i].date.getFullYear() %> <%= dataBanner[i].date.getHours() %>:<%= dataBanner[i].date.getMinutes() %>:<%= dataBanner[i].date.getSeconds() %> Hora de las Islas Canarias.</td>
                 <td>
                 </td>
             </tr>
@@ -22,7 +22,7 @@
             <% if (dataVideo) { %>
             <% for(var i = 0; i < dataVideo.length; i++) { %>
             <tr>
-                <td><%= dataVideo[i].date %></td>
+                <td><%= dataVideo[i].date.getDay() %>-<%= dataVideo[i].date.getMonth() %>-<%= dataVideo[i].date.getFullYear() %> <%= dataVideo[i].date.getHours() %>:<%= dataVideo[i].date.getMinutes() %>:<%= dataVideo[i].date.getSeconds() %> Hora de las Islas Canarias.</td>
             </tr>
             <% } %>
             <% } %>

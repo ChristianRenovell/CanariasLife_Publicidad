@@ -15,7 +15,7 @@
                 <% if (dataBanner.length > 0) { %>
                 <% dataBanner.forEach(dataB => {%>
                 <tr>
-                    <td><%= dataB.date %></td>
+                    <td><%= dataB.date.getDay() %>-<%= dataB.date.getMonth() %>-<%= dataB.date.getFullYear() %> <%= dataB.date.getHours() %>:<%= dataB.date.getMinutes() %>:<%= dataB.date.getSeconds() %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>
