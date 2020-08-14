@@ -1,0 +1,122 @@
+<% include partials/_header %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-5 offset-md-3 card">
+      <div class="card-body">
+        <h3 class="text-center mb-3">EDITAR PROMOTOR</h3>
+        <form action="/publi_services/update/<%= data.id %>/<%= value %>/<%= value2 %>" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" value="<%= data.name%>" placeholder="Nombre" class="form-control" autofocus>
+          </div>
+          <div class="form-group">
+            <input type="text" name="banner" value="<%= data.banner%>" placeholder="url Banner" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="text" name="linkBanner" value="<%= data.linkBanner%>" placeholder="url Banner" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="text" name="video" value="<%= data.video%>" placeholder="url Video" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="text" name="linkVideo" value="<%= data.linkVideo%>" placeholder="url Video" class="form-control">
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <a class="btn btn-primary btn-block" href="javascript:history.back()">Atrás</a>
+            </div>
+            <div class="col-4">
+              <button type="submit" class="btn btn-success btn-block">
+                Actualizar
+              </button>
+            </div>
+            <div class="col-4">
+              <input id="mostrar-modal" type="radio" name="modal" />
+              <label for="mostrar-modal" class="btn btn-danger btn-block">Eliminar</label>
+              <input id="cerrar-modal" type="radio" name="modal" />
+              <div id="modal">
+                <div class="bodyNodal">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="font-weight-bold">Eliminar promotor.</h3>
+                          <hr>
+                          <p class="card-text">Esta apunto de eliminar a un Promotor.</p>
+                          <p class="card-text">Se eliminara su historial de visualizaciones.</p>
+                          <div class="row">
+                            <div class=col-6>
+                              <button href="javascript:history.back()"
+                                class="btn btn-primary btn-block">Cancelar</button>
+                            </div>
+                            <div class="col-6">
+                              <label for="cerrar-modal" class="btn btn-danger btn-block"><a
+                                  href="/clear/<%= data.id %>/<%= value %>/<%= value2 %>">Eliminar</a></label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal css alerta de eliminar-->
+<style>
+  #modal {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 0.5s;
+  }
+
+  a:link,
+  a:visited,
+  a:active {
+    text-decoration: none;
+    color: white;
+  }
+
+  .bodyNodal {
+    background-color: rgb(255, 255, 255);
+    width: 35%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  #mostrar-modal {
+    display: none;
+  }
+
+  #mostrar-modal:checked~#modal {
+    top: 0;
+  }
+
+  #cerrar-modal {
+    display: none;
+  }
+
+  #cerrar-modal:checked~#modal {
+    top: -100vh;
+  }
+
+  #cerrar-modal:checked+label {
+    display: none;
+  }
+</style>
+<% include partials/_footer %>

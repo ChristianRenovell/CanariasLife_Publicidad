@@ -3,6 +3,8 @@ const pdf = require('html-pdf');
 const path = require("path");
 const ejs = require("ejs");
 const { Console } = require('console');
+const puppeteer = require('puppeteer');
+const nodemailer = require("nodemailer");
 
 //pagina principal
 controller.index = (req, res) => {
@@ -47,7 +49,8 @@ controller.report = (req, res) => {
       res.render('reports', {
         dataBanner,
         dataVideo,
-        name: req.params.name,
+        nameBanner: req.params.nameBanner,
+        nameVideo: req.params.nameVideo,
         id: req.params.id
       })
     });
@@ -65,7 +68,7 @@ controller.reportPDFVideo = (req, res) => {
       content = historyVideo;
       ejs.renderFile(path.join(__dirname, '../views/', "report-Video.ejs"), {
         dataVideo: content,
-        name: req.params.name
+        nameVideo: req.params.nameVideo
       }, (err, data) => {
         if (err) {
           res.send(err);
@@ -95,7 +98,7 @@ controller.reportPDFBanner = (req, res) => {
       content = historyBanner;
       ejs.renderFile(path.join(__dirname, '../views/', "report-Banner.ejs"), {
         dataBanner: content,
-        name: req.params.name
+        nameBanner: req.params.nameBanner
       }, (err, data) => {
         if (err) {
 
@@ -114,6 +117,114 @@ controller.reportPDFBanner = (req, res) => {
     });
   });
 };
+
+//pruebas genera PNG envia directamente al navegador
+controller.reportPNG = (req, res) => {
+
+  (async () => {
+    try {
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto(`http://localhost:3000/report/${req.params.id}/${req.params.name}`);
+
+      await page.screenshot({ path: 'example.png' });
+
+      let file = await path.join(__dirname, '../../', "example.png");
+      console.log("encontre el archivo")
+      await res.download(file);
+      console.log("pase el envio")
+      await browser.close();
+    } catch{
+      console.log("sali al catch")
+    }
+  })();
+
+};
+
+//pruebas genera PDF envia directamente al navegador
+/*controller.reportPDF = (req, res) => {
+
+  (async () => {
+    try{
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(`http://localhost:3000/report/${req.params.id}/${req.params.name}`, {waitUntil: 'networkidle2'});
+    await page.pdf({path: 'report.pdf', format: 'A4'});
+    
+    let file = await path.join(__dirname, '../../', "report.pdf");
+    
+    await res.download(file);
+    
+    await browser.close();
+  }catch{
+    await browser.close();
+    console.log("error")
+  }
+  })();
+ 
+};*/
+
+//pruebas genera PDF envia por correo el pdf
+controller.reportPDF = (req, res) => {
+
+  (async () => {
+    try{
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(`http://localhost:3000/report/${req.params.id}/${req.params.name}`, {waitUntil: 'networkidle2'});
+    await page.pdf({path: 'report.pdf', format: 'A4'});
+    await browser.close();
+    
+    await sendMail();
+
+    backURL=req.header('Referer') || '/';
+    // do your thang
+    res.redirect(backURL);
+    
+}catch{
+
+  await browser.close();
+  console.log("error")
+}
+})();
+ 
+};
+
+function sendMail () {
+
+    // Definimos el transporter
+  var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'christiancand@gmail.com',
+      pass: 'mdhnnzfpkxxoptrj'
+    }
+  });
+  // Definimos el email
+  var mailOptions = {
+    from: 'christiancand@gmail.com',
+    to: 'christianrenovell83@gmail.com',
+    subject: 'pruebas email',
+    text: 'esto es una prueba de nodemailer',
+    attachments: [{
+      filename: 'report.pdf',
+      path: (__dirname, '../../', "report.pdf"),
+      contentType: 'application/pdf'
+    }]
+  };
+  // Enviamos el email
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      res.send(500, err.message);
+    } else {
+      
+      console.log("Email sent");
+      
+      res.status(200).jsonp(req.body);
+    }
+  });
+}
 
 
 //devuelve los 5 clientes de la franja horaria para mostrarlos en el frontend
@@ -208,15 +319,17 @@ controller.update = (req, res) => {
 
 
 controller.clear = (req, res) => {
+  console.log("entro en la llamada")
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`, (err, rows) => {
-     console.log("posicion sin datos de promotor")
+    
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameBanner="", banner="",linkBanner="",nameVideo="",video="",linkVideo="" WHERE id = ${req.params.id}`, (err, rows) => {
+      console.log("posicion sin datos de promotor")
     });
-    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) =>{
+    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) => {
       console.log("eliminado historial banner")
     });
-    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) =>{
+    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) => {
       console.log("eliminado historial videos")
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });

@@ -1,0 +1,37 @@
+<% include partials/_header %>
+
+<div class="container mt-5">
+    <h1 class="text-uppercase mb-4"><%= name %></h1>
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <h2 class="text-primary">Historial del Banner</h2>
+            <a href="/publi_services/reportpdfBanner/<%= id %>/<%= name %>" class="btn btn-outline-danger mt-3 mb-3 btn-block">Generar pdf</a>
+            
+            <% if (dataBanner) { %>
+            <% for(var i = 0; i < dataBanner.length; i++) { %>
+            <tr>
+                <td><%= dataBanner[i].date %></td>
+                <td>
+                </td>
+            </tr>
+            <% } %>
+            <% } %>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="text-primary">Historial del Video</h2>
+            <a href="/publi_services/reportpdfVideo/<%= id %>/<%= name %>" class="btn btn-outline-danger mt-3 mb-3 btn-block" id="testButton">Generar PDF</a>
+            <% if (dataVideo) { %>
+            <% for(var i = 0; i < dataVideo.length; i++) { %>
+            <tr>
+                <td><%= dataVideo[i].date %></td>
+            </tr>
+            <% } %>
+            <% } %>
+         
+        </div>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-primary mt-5" style="width: 20%;" href="javascript:history.back()">Atrás</a>
+    </div>
+</div>
+<% include partials/_footer %>

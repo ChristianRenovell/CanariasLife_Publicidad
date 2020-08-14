@@ -7,13 +7,16 @@
         <h3 class="text-center mb-3">EDITAR PROMOTOR</h3>
         <form action="/update/<%= data.id %>/<%= value %>/<%= value2 %>" method="POST">
           <div class="form-group">
-            <input type="text" name="name" value="<%= data.name%>" placeholder="Nombre" class="form-control" autofocus>
+            <input type="text" name="nameBanner" value="<%= data.nameBanner%>" placeholder="Nombre" class="form-control" autofocus>
           </div>
           <div class="form-group">
             <input type="text" name="banner" value="<%= data.banner%>" placeholder="url Banner" class="form-control">
           </div>
           <div class="form-group">
             <input type="text" name="linkBanner" value="<%= data.linkBanner%>" placeholder="url Banner" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="text" name="nameVideo" value="<%= data.nameVideo%>" placeholder="Nombre" class="form-control" autofocus>
           </div>
           <div class="form-group">
             <input type="text" name="video" value="<%= data.video%>" placeholder="url Video" class="form-control">

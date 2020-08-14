@@ -1,0 +1,56 @@
+<% include partials/_header %>
+<% if(value==1){ grup = 1} %>
+<% if(value==6){ grup = 2} %>
+<% if(value==11){ grup = 3} %>
+<% if(value==16){ grup = 4} %>
+<% if(value==21){ grup = 5} %>
+<% if(value==26){ grup = 6} %>
+<% if(value==31){ grup = 7} %>
+<% if(value==36){ grup = 8} %>
+<% if(value==41){ grup = 9} %>
+<% if(value==46){ grup = 10} %>
+<% if(value==51){ grup = 11} %>
+<% if(value==56){ grup = 12} %>
+<div class="container-fluid mt-5 text-center">
+  <h1 class="mb-4">GRUPO <%= grup %></h1>
+  <table class="table table-bordered">
+    <thead class="font-weight-bold">
+      <tr>
+        <td>ID</td>
+        <td>NOMBRE</td>
+        <td>BANNER</td>
+        <td>LINK BANNER</td>
+        <td>VIDEO</td>
+        <td>LINK VIDEO</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) { %>
+      <% for(var i = 0; i < data.length; i++) { %>
+      <tr>
+        <td><%= data[i].id %></td>
+        <td><%= data[i].name %></td>
+        <td><%= data[i].banner %></td>
+        <td><%= data[i].linkBanner %></td>
+        <td><%= data[i].video %></td>
+        <td><%= data[i].linkVideo %></td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+           <% if (data[i].name ==""){data[i].name="Promotor sin nombre."}%>
+            <a href="/publi_services/report/<%= data[i].id %>/<%= data[i].name %>" class="btn btn-info ml-2">Informe</a>
+            <a href="/publi_services/updateView/<%= data[i].id %>/<%= value %>/<%= value2 %>" class="btn btn-warning">Editar</a>
+          </div>
+        </td>
+      </tr>
+      <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  
+  <div>
+    <a class="btn btn-primary" style="width: 20%;" href="/">Atrás</a>
+  </div>
+</div>
+
+<% include partials/_footer %>

@@ -1,27 +1,22 @@
+let tag = document.getElementById("iframePubli")
+let tagCrono = document.getElementById("publi").style.display = "none";
 
-let tag = document.querySelector("iframe");
-
-//publicidad
-tag.setAttribute("src","https://www.youtube.com/embed/3WVQ9ugRdjI" );
-
-function mensaje() {
+function see() {
+    let tagCrono = document.getElementById("publi").style.display = "block";
+    let tagBut = document.getElementById("btn").style.display = "none";
+    setTimeout(change, 6000);
+    tag.setAttribute("src", "https://gesbonos.com/publicidad/videos.html");
     
-document.getElementById("iframePublicidad").style.display = "none";
 }
+
+function change() {
+    let tagCrono = document.getElementById("publi").style.display = "none";
     
-setTimeout(mensaje,6000);
-
-window.onload = updateClock;
-var totalTime = 5;
-function updateClock() {
-document.getElementById('countdown').innerHTML = totalTime;
-if(totalTime==0){
-
-let tagCrono = document.getElementById("publi").style.display ="none";
-
-}else{
-totalTime-=1;
-setTimeout("updateClock()",1000);
+    console.log("kodncoiewnw")
+    tag.setAttribute("src", "https://www.youtube.com/embed/sZoGAfmxvpU");
 }
-}
+
+
+
+
 

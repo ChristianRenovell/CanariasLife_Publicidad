@@ -5,7 +5,8 @@ const express = require('express'),
       myConnection = require('express-myconnection'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
-      historypromoters = require('./src/historyPromoters');
+      historypromoters = require('./src/historyPromotersBanner');
+      historypromotersVideos = require('./src/historyPromotersVideos');
 
     
 const app = express();

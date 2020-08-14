@@ -4,14 +4,16 @@ const customerController = require('../controllers/customerController');
 //Rutas del admin panel.
 router.get('/', customerController.index);
 router.get('/list/:value/:value2', customerController.list);
-router.get('/report/:id/:name', customerController.report);
+router.get('/report/:id/:nameBanner/:nameVideo', customerController.report);
 router.get('/updateView/:id/:value/:value2', customerController.edit);
 router.post('/update/:id/:value/:value2', customerController.update);
 router.get('/clear/:id/:value/:value2', customerController.clear);
 
 //Rutas del los reportes en PDF
-router.get('/reportpdfBanner/:id/:name', customerController.reportPDFBanner);
-router.get('/reportpdfVideo/:id/:name', customerController.reportPDFVideo);
+router.get('/reportpdfBanner/:id/:nameBanner', customerController.reportPDFBanner);
+router.get('/reportpdfVideo/:id/:nameVideo', customerController.reportPDFVideo);
+router.get('/reportPNG/:id/:name', customerController.reportPNG);
+router.get('/reportPDF/:id/:name', customerController.reportPDF);
 
 //Rutas del Frontend.
 router.post('/list/:nm1/:nm2', customerController.listData);

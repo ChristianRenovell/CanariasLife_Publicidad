@@ -21,8 +21,8 @@ function gettJson(nin1, nin2) {
     method: 'POST',
     redirect: 'follow'
   };
-
-  fetch(`http://localhost:3000/list/${nin1}/${nin2}`, requestOptions)
+//cambiar en el servidor a la url
+  fetch(`https://gesbonos.com/publi_services/list/${nin1}/${nin2}`, requestOptions)
     .then(response => response.text())
     .then(result => {
       console.log(result, "resultado");
@@ -39,7 +39,7 @@ function createVideo(data) {
   //nombra al benner que se mostrara
   let number = Math.floor(Math.random() * (5 - 0)) + 0;
 
-  let tag = document.querySelector("iframe");
+  let tag = document.querySelector("video");
   //let tagA = document.querySelector("a");
 
   tag.setAttribute("src", dataJ[number].video);

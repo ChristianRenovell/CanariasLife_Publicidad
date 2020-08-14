@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+</head>
+<body>
+    <div>
+        <div style="background-color: #008CBA;">
+            <img src="https://www.canariaslife.com/wp-content/uploads/2020/05/Canarias_Life_Logo_horizontal_portada.png"
+                alt="canariasLife" width="150px" style="margin: 10px;">
+        </div>
+        <div style="margin: 20px;">
+            <h1><%= name %></h1>
+            <table>
+                <% if (dataVideo.length > 0) { %>
+                <% dataVideo.forEach(dataV => {%>
+                <tr>
+                    <td><%= dataV.id %></td>
+                    <td><%= dataV.date %></td>
+                    </td>
+                </tr>
+                <%  });%>
+                <% }%>
+                <h4>Total visualizaciones de los Videos: <%= dataVideo.length %></h4>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
