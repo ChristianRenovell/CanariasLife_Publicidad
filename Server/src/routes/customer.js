@@ -7,7 +7,9 @@ router.get('/list/:value/:value2', customerController.list);
 router.get('/report/:id/:nameBanner/:nameVideo', customerController.report);
 router.get('/updateView/:id/:value/:value2', customerController.edit);
 router.post('/update/:id/:value/:value2', customerController.update);
-router.get('/clear/:id/:value/:value2', customerController.clear);
+//router.get('/clear/:id/:value/:value2', customerController.clear);
+router.get('/clearBanner/:id/:value/:value2', customerController.clearBanner);
+router.get('/clearVideo/:id/:value/:value2', customerController.clearVideo);
 
 //Rutas del los reportes en PDF
 router.get('/reportpdfBanner/:id/:nameBanner', customerController.reportPDFBanner);

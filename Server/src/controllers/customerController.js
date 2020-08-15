@@ -168,31 +168,31 @@ controller.reportPNG = (req, res) => {
 controller.reportPDF = (req, res) => {
 
   (async () => {
-    try{
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(`http://localhost:3000/report/${req.params.id}/${req.params.name}`, {waitUntil: 'networkidle2'});
-    await page.pdf({path: 'report.pdf', format: 'A4'});
-    await browser.close();
-    
-    await sendMail();
+    try {
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto(`http://localhost:3000/report/${req.params.id}/${req.params.name}`, { waitUntil: 'networkidle2' });
+      await page.pdf({ path: 'report.pdf', format: 'A4' });
+      await browser.close();
 
-    backURL=req.header('Referer') || '/';
-    // do your thang
-    res.redirect(backURL);
-    
-}catch{
+      await sendMail();
 
-  await browser.close();
-  console.log("error")
-}
-})();
- 
+      backURL = req.header('Referer') || '/';
+      // do your thang
+      res.redirect(backURL);
+
+    } catch{
+
+      await browser.close();
+      console.log("error")
+    }
+  })();
+
 };
 
-function sendMail () {
+function sendMail() {
 
-    // Definimos el transporter
+  // Definimos el transporter
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -218,9 +218,9 @@ function sendMail () {
       console.log(error);
       res.send(500, err.message);
     } else {
-      
+
       console.log("Email sent");
-      
+
       res.status(200).jsonp(req.body);
     }
   });
@@ -318,11 +318,11 @@ controller.update = (req, res) => {
 };
 
 
-controller.clear = (req, res) => {
+/*controller.clear = (req, res) => {
   console.log("entro en la llamada")
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    
+
     connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameBanner="", banner="",linkBanner="",nameVideo="",video="",linkVideo="" WHERE id = ${req.params.id}`, (err, rows) => {
       console.log("posicion sin datos de promotor")
     });
@@ -331,6 +331,36 @@ controller.clear = (req, res) => {
     });
     connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) => {
       console.log("eliminado historial videos")
+      res.redirect(`/list/${req.params.value}/${req.params.value2}`);
+    });
+  });
+}*/
+
+controller.clearBanner = (req, res) => {
+  console.log("clear Banner")
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameBanner="", banner="",linkBanner="" WHERE id = ${req.params.id}`, (err, rows) => {
+      
+    });
+    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) => {
+      
+      res.redirect(`/list/${req.params.value}/${req.params.value2}`);
+    });
+  });
+}
+
+controller.clearVideo = (req, res) => {
+  console.log("clear Video")
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameVideo="",video="",linkVideo="" WHERE id = ${req.params.id}`, (err, rows) => {
+
+    });
+    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) => {
+
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
   });
