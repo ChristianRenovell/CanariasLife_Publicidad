@@ -47,7 +47,8 @@ controller.report = (req, res) => {
       res.render('reports', {
         dataBanner,
         dataVideo,
-        name: req.params.name,
+        nameBanner: req.params.nameBanner,
+        nameVideo: req.params.nameVideo,
         id: req.params.id
       })
     });
@@ -65,7 +66,7 @@ controller.reportPDFVideo = (req, res) => {
       content = historyVideo;
       ejs.renderFile(path.join(__dirname, '../views/', "report-Video.ejs"), {
         dataVideo: content,
-        name: req.params.name
+        nameVideo: req.params.nameVideo
       }, (err, data) => {
         if (err) {
           res.send(err);
@@ -95,7 +96,7 @@ controller.reportPDFBanner = (req, res) => {
       content = historyBanner;
       ejs.renderFile(path.join(__dirname, '../views/', "report-Banner.ejs"), {
         dataBanner: content,
-        name: req.params.name
+        nameBanner: req.params.nameBanner
       }, (err, data) => {
         if (err) {
 
@@ -128,7 +129,7 @@ controller.listData = (req, res) => {
   });
 };
 
-//registra las  banner 
+//registra l0s  banner 
 controller.loggerBanner = (req, res) => {
 
   let now;
@@ -206,22 +207,36 @@ controller.update = (req, res) => {
   });
 };
 
-
-controller.clear = (req, res) => {
+controller.clearBanner = (req, res) => {
+  console.log("clear Banner")
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query(`UPDATE promoters SET id = ${req.params.id} ,name="", banner="",video="" WHERE id = ${req.params.id}`, (err, rows) => {
-     console.log("posicion sin datos de promotor")
+
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameBanner="", banner="",linkBanner="" WHERE id = ${req.params.id}`, (err, rows) => {
+      
     });
-    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) =>{
-      console.log("eliminado historial banner")
-    });
-    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) =>{
-      console.log("eliminado historial videos")
+    connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) => {
+      
       res.redirect(`/publi_services/list/${req.params.value}/${req.params.value2}`);
     });
   });
 }
+
+controller.clearVideo = (req, res) => {
+  console.log("clear Video")
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+
+    connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameVideo="",video="",linkVideo="" WHERE id = ${req.params.id}`, (err, rows) => {
+
+    });
+    connection.query(`DELETE FROM historyvideo WHERE id = ${req.params.id}`, (err, rows) => {
+
+      res.redirect(`/publi_services/list/${req.params.value}/${req.params.value2}`);
+    });
+  });
+}
+
 
 //elimina registro-------
 /*controller.delete = (req, res) => {

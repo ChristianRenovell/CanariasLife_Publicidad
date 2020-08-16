@@ -4,9 +4,10 @@ const express = require('express'),
       mysql = require('mysql'),
       myConnection = require('express-myconnection'),
       cors = require('cors'),
-      bodyParser = require('body-parser'),
-      historypromoters = require('./src/historyPromoters');
+      bodyParser = require('body-parser');
 
+  const  historypromotersVideos = require('./src/historyPromotersVideos');
+  const  historypromotersBanner = require('./src/historyPromotersBanner');
     
 const app = express();
 
@@ -43,3 +44,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
+

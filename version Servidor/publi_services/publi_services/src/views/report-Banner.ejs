@@ -10,13 +10,12 @@
                 alt="canariasLife" width="150px" style="margin: 10px;">
         </div>
         <div style="margin: 20px;">
-            <h1><%= name %></h1>
+            <h1><%= nameBanner %></h1>
             <table>
                 <% if (dataBanner.length > 0) { %>
                 <% dataBanner.forEach(dataB => {%>
                 <tr>
-                    <td><%= dataB.id %></td>
-                    <td><%= dataB.date %></td>
+                    <td><%= dataB.date.getDate() %>-<%= dataB.date.getMonth() %>-<%= dataB.date.getFullYear() %> <%= dataB.date.getHours() %>:<%= dataB.date.getMinutes() %>:<%= dataB.date.getSeconds() %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>

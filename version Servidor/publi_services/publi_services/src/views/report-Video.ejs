@@ -10,13 +10,12 @@
                 alt="canariasLife" width="150px" style="margin: 10px;">
         </div>
         <div style="margin: 20px;">
-            <h1><%= name %></h1>
+            <h1><%= nameVideo %></h1>
             <table>
                 <% if (dataVideo.length > 0) { %>
                 <% dataVideo.forEach(dataV => {%>
                 <tr>
-                    <td><%= dataV.id %></td>
-                    <td><%= dataV.date %></td>
+                    <td><%= dataV.date.getDate() %>-<%= dataV.date.getMonth() %>-<%= dataV.date.getFullYear() %> <%= dataV.date.getHours() %>:<%= dataV.date.getMinutes() %>:<%= dataV.date.getSeconds() %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>
