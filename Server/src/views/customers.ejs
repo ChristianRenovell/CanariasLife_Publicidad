@@ -41,169 +41,92 @@
           <div class="btn-group" role="group" aria-label="Basic example">
             <% if (data[i].nameVideo ==""){data[i].nameVideo="Promotor sin nombre."}%>
             <% if (data[i].nameBanner ==""){data[i].nameBanner="Promotor sin nombre."}%>
-            <label for="mostrar-modal" class="btn btn-info btInfo ml-2">Informe</label>
-            <a href="/publi_services/updateView/<%= data[i].id %>/<%= value %>/<%= value2 %>"><label class="btn btn-warning btInfo ml-2">Editar</label></a>
-          </div>
-        </td>
-      </tr>
-      <div class="col-12 mb-3">
-        <input id="mostrar-modal" type="radio" name="modal" />
-        <input id="cerrar-modal" type="radio" name="modal" />
-        <div id="modal">
-          <div class="bodyNodal">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h3 class="font-weight-bold">Seleccione un Rango de Fechas</h3>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-6 mb-3">
-                        <label for="start">Fecha início</label>
-                        <input class="form-control" type="date" id="start" name="trip-start"  min="" max="">
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label  for="start">Fecha Fin</label>
-                        <input class="form-control" type="date" id="end" name="trip-start"  min="" max="">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class=col-6>
-                        <button for="cerrar-modal" onclick="window.location.reload(true)"
-                          class="btn btn-danger ml-2">Cancelar</button>
-                      </div>
-                      <div class="col-6">
-                        <a onclick="getDate('<%= data[i].id %>','<%= data[i].nameBanner%>','<%= data[i].nameVideo%>')"
-                          class="btn btn-success ml-2">ver informe</a>
+            <label for="" class="btn btn-info btInfo ml-2" onclick="getIde('<%= data[i].id %>')">Informe</label>
+            <div class="infoDatas" style="display:none" id="<%= data[i].id %>">
+              <div id="modal">
+                <div class="bodyNodal">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h1><%= data[i].id %></h1>
+                          <h3 class="font-weight-bold">Seleccione un Rango de Fechas</h3>
+                          <hr>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <label for="start">Fecha início</label>
+                              <input class="form-control" type="date" id="start<%= data[i].id %>" name="trip-start" min="" max="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                              <label for="start">Fecha Fin</label>
+                              <input class="form-control" type="date" id="end<%= data[i].id %>" name="trip-start" min="" max="">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class=col-6>
+                              <button for="cerrar-modal" onclick="window.location.reload(true)"
+                                class="btn btn-danger ml-2">Cancelar</button>
+                            </div>
+                            <div class="col-6">
+                              <a onclick="getDate('<%= data[i].id %>','<%= data[i].nameBanner%>','<%= data[i].nameVideo%>')"
+                                class="btn btn-success ml-2">ver informe</a>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <a href="/publi_services/updateView/<%= data[i].id %>/<%= value %>/<%= value2 %>"><label
+                class="btn btn-warning btInfo ml-2">Editar</label></a>
           </div>
-        </div>
-      </div>
+        </td>
+      </tr>
       <% } %>
       <% } %>
     </tbody>
   </table>
   <div>
-    <a class="btn btn-primary" style="width: 20%;" href="/">Atrás</a>
+    <a class="btn btn-primary" style="width: 20%;" href="/publi_services">Atrás</a>
   </div>
 </div>
 <script>
-  function getDate(id,nameB,nameV){
-    let dataStart = document.getElementById("start").value
-    let dataEnd = document.getElementById("end").value
-    console.log(nameV)
-    if(Date.parse(dataEnd) < Date.parse(dataStart)) {
-    alert("La fecha final debe ser mayor a la fecha inicial");
-    }else {
-      location.href = `/publi_services/report/${id}/${nameB}/${nameV}/${dataEnd}/${dataStart}`;
+
+  function getIde(id) {
+    document.getElementById(id).style.display = "block"
+  }
+
+  function getDate(id, nameB, nameV) {
+    let dataStart = document.getElementById("start"+id).value
+    let dataEnd = document.getElementById("end"+id).value
+
+    if (Date.parse(dataEnd) < Date.parse(dataStart)) {
+      alert("La fecha final debe ser mayor a la fecha inicial");
+    } else {
+      location.href = `/report/${id}/${nameB}/${nameV}/${dataEnd}/${dataStart}`;
     }
   }
 </script>
 <style>
- 
-  .boxB {
-    padding: 30px;
-    border: solid rgb(196, 196, 196) 1px;
-  }
-
   #modal {
     position: fixed;
-    top: -100vh;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    transition: all 0.5s;
     z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: open;
+    animation-duration: 0.5s;
+  }
+  @keyframes open {
+    from {
+     top: 0%;
+  }
+  to {
+    top: 50%
+  }
   }
 
-  #modal2 {
-    position: fixed;
-    top: -100vh;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    transition: all 0.5s;
-    z-index: 1000;
-  }
-
-  a:link,
-  a:visited,
-  a:active {
-    text-decoration: none;
-    color: white;
-  }
-
-  .bodyNodal {
-    background-color: rgb(255, 255, 255);
-    width: 35%;
-    height: 20%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    font-size: 1.5em;
-    text-align: center;
-  }
-
-  .bodyNodal2 {
-    background-color: rgb(255, 255, 255);
-    width: 35%;
-    height: 20%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    font-size: 1.5em;
-    text-align: center;
-  }
-
-  #mostrar-modal {
-    display: none;
-  }
-
-  #mostrar-modal:checked~#modal {
-    top: 0;
-  }
-
-  #cerrar-modal {
-    display: none;
-  }
-
-  #cerrar-modal:checked~#modal {
-    top: -100vh;
-  }
-
-  #cerrar-modal:checked+label {
-    display: none;
-  }
-
-  #mostrar-modal2 {
-    display: none;
-  }
-
-  #mostrar-modal2:checked~#modal2 {
-    top: 0;
-  }
-
-  #cerrar-modal2 {
-    display: none;
-  }
-
-  #cerrar-modal2:checked~#modal2 {
-    top: -100vh;
-  }
-
-  #cerrar-modal2:checked+label {
-    display: none;
-  }
 </style>
 <% include partials/_footer %>
