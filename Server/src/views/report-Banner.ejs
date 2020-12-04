@@ -15,23 +15,26 @@
                 <% if (dataBanner.length > 0) { %>
                 <% dataBanner.forEach(dataB => {%>
                 <tr>
-                <%
+                    <%
+                    let diaB = dataB.date.getDate();
                     let horaB = dataB.date.getHours();
                     let minutoB = dataB.date.getMinutes();
                     let segundosB = dataB.date.getSeconds();
                     
+                    if(diaB <= 9) {
+                        diaB = "0"+ diaB;
+                    }
                     if(horaB <= 9) {
-                        horaB = "0"+ dataB.date.getHours();
+                        horaB = "0"+ horaB;
                     } 
                     if(minutoB <= 9) {
-                        minutoB = "0"+ dataB.date.getMinutes();
+                        minutoB = "0"+ minutoB;
                     }
                     if(segundosB <= 9) {
-                        segundosB = "0"+ dataB.date.getSeconds();
+                        segundosB = "0"+ segundosB;
                     }
                 %>
-          
-                    <td><%= dataB.date.getDate() %>-<%= dataB.date.getMonth() %>-<%= dataB.date.getFullYear() %> <%= horaB %>:<%= minutoB %>:<%= segundosB %> Hora de las Islas Canarias.</td>
+                    <td><%= diaB %>-<%= dataB.date.getMonth() %>-<%= dataB.date.getFullYear() %> <%= horaB %>:<%= minutoB %>:<%= segundosB %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>

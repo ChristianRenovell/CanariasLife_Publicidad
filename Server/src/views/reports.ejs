@@ -11,22 +11,26 @@
             <table>
             <tr>
             <%
+                    let diaB = dataBanner[i].date.getDate();
                     let horaB = dataBanner[i].date.getHours();
                     let minutoB = dataBanner[i].date.getMinutes();
                     let segundosB = dataBanner[i].date.getSeconds();
                     
+                    if(diaB <= 9) {
+                        diaB = "0"+ diaB;
+                    }
                     if(horaB <= 9) {
-                        horaB = "0"+ dataBanner[i].date.getHours();
+                        horaB = "0"+ horaB;
                     } 
                     if(minutoB <= 9) {
-                        minutoB = "0"+ dataBanner[i].date.getMinutes();
+                        minutoB = "0"+ minutoB;
                     }
                     if(segundosB <= 9) {
-                        segundosB = "0"+ dataBanner[i].date.getSeconds();
+                        segundosB = "0"+ segundosB;
                     }
                
                 %>
-                <td><h4><%= dataBanner[i].date.getDate() %>/<%= dataBanner[i].date.getMonth()+1 %>/<%= dataBanner[i].date.getFullYear() %> <%= horaB %>:<%= minutoB %>:<%= segundosB %> Hora de las Islas Canarias .</h4></td>
+                <td><h4><%= diaB %>/<%= dataBanner[i].date.getMonth()+1 %>/<%= dataBanner[i].date.getFullYear() %> <%= horaB %>:<%= minutoB %>:<%= segundosB %> Hora de las Islas Canarias .</h4></td>
             </tr>
             </table>
             <% } %>
@@ -41,22 +45,26 @@
             <table>
             <tr>
                  <%
+                let diaV = dataVideo[i].date.getDate();
                 let horaV = dataVideo[i].date.getHours();
                 let minutoV = dataVideo[i].date.getMinutes();
                 let segundosV = dataVideo[i].date.getSeconds();
                 
+                 if(diaV <= 9) {
+                    diaV = "0"+ diaV;
+                } 
                 if(horaV <= 9) {
-                    horaV = "0"+ dataVideo[i].date.getHours();
+                    horaV = "0"+ horaV;
                 } 
                 if(minutoV <= 9) {
-                    minutoV = "0"+ dataVideo[i].date.getMinutes();
+                    minutoV = "0"+ minutoV;
                 }
                 if(segundosV <= 9) {
-                    segundosV = "0"+ dataVideo[i].date.getSeconds();
+                    segundosV = "0"+ segundosV;
                 }
                 %>
            
-                <td><h4><%= dataVideo[i].date.getDate() %>-<%= dataVideo[i].date.getMonth()+1 %>-<%= dataVideo[i].date.getFullYear() %> <%= horaV %>:<%= minutoV %>:<%= segundosV %> Hora de las Islas Canarias.</h4></td>
+                <td><h4><%= diaV %>-<%= dataVideo[i].date.getMonth()+1 %>-<%= dataVideo[i].date.getFullYear() %> <%= horaV %>:<%= minutoV %>:<%= segundosV %> Hora de las Islas Canarias.</h4></td>
             </tr>
             </table>
             <% } %>
@@ -65,7 +73,7 @@
         </div>
     </div>
     <div class="text-center">
-        <a class="btn btn-primary mt-5" style="width: 20%;" href="javascript:history.back()">Atrás</a>
+        <a class="btn btn-primary mt-5" style="width: 20%;" href="/publi_services">Atrás</a>
     </div>
 </div>
 <% include partials/_footer %>

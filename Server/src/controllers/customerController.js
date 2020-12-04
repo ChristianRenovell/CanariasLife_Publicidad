@@ -40,10 +40,7 @@ controller.list = (req, res) => {
 controller.report = (req, res) => {
   let dataBanner;
   let dataVideo;
-  console.log(req.params.dateStart,"fecha start")
-  console.log(req.params.dateEnd,"fecha end")
   req.getConnection((err, conn) => {
-    
     conn.query(`select * from historybanner where id = ${req.params.id} and CAST(date AS DATE) between '${req.params.dateStart}' and '${req.params.dateEnd}'`, (err, dataHistoryBanner) => {
       dataBanner = dataHistoryBanner;
     });
@@ -64,7 +61,7 @@ controller.report = (req, res) => {
 controller.reportPDFVideo = (req, res) => {
   var content;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, historyVideo) => {
+    conn.query("SELECT * FROM historyVideo WHERE id = ? order by date DESC", req.params.id, (err, historyVideo) => {
       if (err) {
         res.json(err);
       }
@@ -94,7 +91,7 @@ controller.reportPDFVideo = (req, res) => {
 controller.reportPDFBanner = (req, res) => {
   var content;
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, historyBanner) => {
+    conn.query("SELECT * FROM historyBanner WHERE id = ? order by date DESC", req.params.id, (err, historyBanner) => {
       if (err) {
         res.json(err);
       }
@@ -137,7 +134,7 @@ controller.reportPNG = (req, res) => {
       await res.download(file);
       console.log("pase el envio")
       await browser.close();
-    } catch{
+    } catch {
       console.log("sali al catch")
     }
   })();
@@ -184,7 +181,7 @@ controller.reportPDF = (req, res) => {
       // do your thang
       res.redirect(backURL);
 
-    } catch{
+    } catch {
 
       await browser.close();
       console.log("error")
@@ -347,10 +344,10 @@ controller.clearBanner = (req, res) => {
   req.getConnection((err, connection) => {
 
     connection.query(`UPDATE promoters SET id = ${req.params.id} ,nameBanner="", banner="",linkBanner="" WHERE id = ${req.params.id}`, (err, rows) => {
-      
+
     });
     connection.query(`DELETE FROM historybanner WHERE id = ${req.params.id}`, (err, rows) => {
-      
+
       res.redirect(`/list/${req.params.value}/${req.params.value2}`);
     });
   });

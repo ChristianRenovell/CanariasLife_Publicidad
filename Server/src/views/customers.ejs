@@ -42,7 +42,7 @@
             <% if (data[i].nameVideo ==""){data[i].nameVideo="Promotor sin nombre."}%>
             <% if (data[i].nameBanner ==""){data[i].nameBanner="Promotor sin nombre."}%>
             <label for="mostrar-modal" class="btn btn-info btInfo ml-2">Informe</label>
-            <a href="/updateView/<%= data[i].id %>/<%= value %>/<%= value2 %>"><label class="btn btn-warning btInfo ml-2">Editar</label></a>
+            <a href="/publi_services/updateView/<%= data[i].id %>/<%= value %>/<%= value2 %>"><label class="btn btn-warning btInfo ml-2">Editar</label></a>
           </div>
         </td>
       </tr>
@@ -100,7 +100,7 @@
     if(Date.parse(dataEnd) < Date.parse(dataStart)) {
     alert("La fecha final debe ser mayor a la fecha inicial");
     }else {
-      location.href = `/report/${id}/${nameB}/${nameV}/${dataEnd}/${dataStart}`;
+      location.href = `/publi_services/report/${id}/${nameB}/${nameV}/${dataEnd}/${dataStart}`;
     }
   }
 </script>

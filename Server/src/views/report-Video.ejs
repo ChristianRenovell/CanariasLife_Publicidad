@@ -16,21 +16,25 @@
                 <% dataVideo.forEach(dataV => {%>
                 <tr>
                      <%
-                        let horaV = dataV.date.getHours();
-                        let minutoV = dataV.date.getMinutes();
-                        let segundosV = dataV.date.getSeconds();
-                        
-                        if(horaV <= 9) {
-                            horaV = "0"+ dataV.date.getHours();
-                        } 
-                        if(minutoV <= 9) {
-                            minutoV = "0"+ dataV.date.getMinutes();
-                        }
-                        if(segundosV <= 9) {
-                            segundosV = "0"+ dataV.date.getSeconds();
-                        }
+                    let diaV = dataV.date.getDate();
+                    let horaV = dataV.date.getHours();
+                    let minutoV = dataV.date.getMinutes();
+                    let segundosV = dataV.date.getSeconds();
+                    
+                    if(diaV <= 9) {
+                        diaV = "0"+ diaV;
+                    }
+                    if(horaV <= 9) {
+                        horaV = "0"+ horaV;
+                    } 
+                    if(minutoV <= 9) {
+                        minutoV = "0"+ minutoV;
+                    }
+                    if(segundosV <= 9) {
+                        segundosV = "0"+ segundosV;
+                    }
                 %>
-                    <td><%= dataV.date.getDate() %>-<%= dataV.date.getMonth() %>-<%= dataV.date.getFullYear() %> <%= horaV %>:<%= minutoV %>:<%= segundosV %> Hora de las Islas Canarias.</td>
+                    <td><%= diaV %>-<%= dataV.date.getMonth() %>-<%= dataV.date.getFullYear() %> <%= horaV %>:<%= minutoV %>:<%= segundosV %> Hora de las Islas Canarias.</td>
                     </td>
                 </tr>
                 <%  });%>
