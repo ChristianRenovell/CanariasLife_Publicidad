@@ -40,11 +40,14 @@ controller.list = (req, res) => {
 controller.report = (req, res) => {
   let dataBanner;
   let dataVideo;
+  console.log(req.params.dateStart,"fecha start")
+  console.log(req.params.dateEnd,"fecha end")
   req.getConnection((err, conn) => {
-    conn.query("SELECT * FROM historyBanner WHERE id = ?", req.params.id, (err, dataHistoryBanner) => {
+    
+    conn.query(`select * from historybanner where id = ${req.params.id} and CAST(date AS DATE) between '${req.params.dateStart}' and '${req.params.dateEnd}'`, (err, dataHistoryBanner) => {
       dataBanner = dataHistoryBanner;
     });
-    conn.query("SELECT * FROM historyVideo WHERE id = ?", req.params.id, (err, dataHistoryVideo) => {
+    conn.query(`select * from historyVideo where id = ${req.params.id} and CAST(date AS DATE) between '${req.params.dateStart}' and '${req.params.dateEnd}'`, (err, dataHistoryVideo) => {
       dataVideo = dataHistoryVideo;
       res.render('reports', {
         dataBanner,
@@ -239,7 +242,7 @@ controller.listData = (req, res) => {
   });
 };
 
-//registra las  banner 
+//registra l0s  banner 
 controller.loggerBanner = (req, res) => {
 
   let now;
@@ -252,6 +255,8 @@ controller.loggerBanner = (req, res) => {
   now = `${year}-${month}-${day}`;
 
   let grupDateHours = now + ' ' + hora;
+
+  console.log(grupDateHours)
 
   req.getConnection((err, conn) => {
     //INSERT INTO history (`id` , `dataBanner`) VALUES ( '2' , '2020-07-07 18:19:00')

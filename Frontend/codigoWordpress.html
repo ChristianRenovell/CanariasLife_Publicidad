@@ -1,36 +1,113 @@
-<script type="text/javascript">
-
-  function miFuncion() {
-    let tag = document.getElementById("iframePubli")
+<iframe id="iframePubli"   frameborder="0" scrolling="no" marginwidth="0" marginheight="0" allow="autoplay" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+    <div>
+  		<button id="skip" class="skipBtn" onclick="skipad()">
+     		VER WEB CAM
+    	</button>
+		</div>
     
-    tag.setAttribute("src", "https://gesbonos.com/publicidad/videos.html");
-    function change() {
-        let tagCrono = document.getElementById("publi").style.display = "none";
-      tag.setAttribute("src", "//www.skylinewebcams.com/webcam/espana/canarias/santa-cruz-de-tenerife/plaza-de-la-candelaria.html?w=404");
-    }
-    setTimeout(change, 6000);
-  }
+  </div>
+</div>
+<div id="publi" class="publiDiv">
+    	<span>Publicidad</span>
+      <span id="countdown"></span>
+  	</div>
+
+<!--el div "fullscreen" es realmente el que pasa a pantalla completa y no el video-->
+<div id="fullscreen" class="full">
+  <!--este div contiene el iframe, el logo de canariasLIFE y el boton para pantalla completa-->
+  <div class="cont-iframe">
+  	<script type="text/javascript" src="https://www.skylinewebcams.com/skyline/shadow/shadowbox.php?lang=it"></script>
+
+    <div class="cSkyLane">
+      <a href="#" rel="shadowbox;width=800;height=500">
+        <img src="https://canariaslife.com/wp-content/uploads/2020/03/transparente.png" alt="Webcam Live" border="0" id="lSky"/>
+      </a>
+    </div>
+
+    <div class="cTimeLapse"/>
+      <a href="//www.skylinewebcams.com/webcam/espana/canarias/santa-cruz-de-tenerife/plaza-de-la-candelaria.html?w=404&timelapse=1" rel="shadowbox;width=800;height=500">
+      <img src="https://staging.canariaslife.com/test/wp-content/uploads/2020/05/Timelapse.png" alt="Webcam Live" border="0" id="lTime"/>
+    </div>
+
+    <div class="cCanariasLife">
+      <a href="#" rel="shadowbox;">
+        <img src="https://staging.canariaslife.com/test/wp-content/uploads/2020/05/Logo-redondo-80x80px.png" alt="Webcam Live" border="0" id="lCanarias"/>
+      </a>
+    </div>
+
+    <script type="text/javascript">
+      let tag = document.getElementById("iframePubli")
+     let btnSkipAd = document.getElementById("skip").style.display = "none";
+     let logoSky = document.getElementById("lSky").style.display = "none";
+     let logoTime = document.getElementById("lTime").style.display = "none";
+     let logoCanarias = document.getElementById("lCanarias").style.display = "none";
+      function miFuncion() {
+         
+       tag.setAttribute("src", "https://gesbonos.com/publicidad/videos.html");
+      
+        focus();
+       var listener = window.addEventListener('blur', function() {
+       if (document.activeElement === document.getElementById('iframePubli')) {
+          
+         function change() {
+           
+           let btnSkipAd = document.getElementById("skip").style.display = "block";
+           let tagCrono = document.getElementById("publi").style.display = "none";
+       }
+       setTimeout(change, 7000);
+         
+       }
+         window.removeEventListener('blur', listener);
+       });
+        
+       
+     }
+       
+     window.onload = miFuncion;
+   
+     function skipad(){
+         let btnSkipAd = document.getElementById("skip").style.display = "none";
+         let logoSky = document.getElementById("lSky").style.display = "block";
+         let logoTime = document.getElementById("lTime").style.display = "block";
+         let logoCanarias = document.getElementById("lCanarias").style.display = "block";
+         tag.setAttribute("src", "//www.skylinewebcams.com/webcam/espana/canarias/santa-cruz-de-tenerife/plaza-de-la-candelaria.html?w=404");
+     }
+     
+     
+   </script>
+   <style type="text/css">
+     .publiDiv {
+       position: absolute;
+       top: 0%;
+       right: 0%;
+       background-color: rgba(29, 112, 183, 0.6);
+       color: cornsilk;
+       width: 120px;
+       height: 33px;
+       text-align: center;
+       font-family: 'Lucida Sans', 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
+       font-size: 1.1em;
+       padding: 5px;
+     }
+   
+     .publiDiv span {
+       position: relative;
+     }
+     .skipBtn{
+       border: none;
+       position: absolute;
+       right: 0%;
+       top: 0%;
+       background-color: rgba(29, 112, 183, 0.6);
+       color: cornsilk;
+       width: 200px;
+       height: 50px;
+       text-align: center;
+       font-family: 'Lucida Sans', 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
+       font-size: 1.1em;
+       padding: 5px;
+       cursor: pointer;
+       margin-bottom: ;
+     }
     
-  window.onload = miFuncion;
-
-</script>
-<style type="text/css">
-  .publiDiv {
-    position: relative;
-    top: -60px;
-    left: 1130px;
-    background-color: rgba(29, 112, 183, 0.6);
-    color: cornsilk;
-    width: 120px;
-    height: 33px;
-    text-align: center;
-    font-family: 'Lucida Sans', 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
-    font-size: 1.1em;
-    padding: 5px;
-  }
-
-  .publiDiv span {
-    position: relative;
-
-  }
-</style>
+   </style>

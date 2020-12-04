@@ -101,4 +101,3 @@ INSERT INTO `promoters`(`id`, `nameBanner`, `banner`,`linkBanner`,`nameVideo`, `
 INSERT INTO `promoters`(`id`, `nameBanner`, `banner`,`linkBanner`,`nameVideo`, `video`,`linkVideo`) VALUES (58,'','','','','','');
 INSERT INTO `promoters`(`id`, `nameBanner`, `banner`,`linkBanner`,`nameVideo`, `video`,`linkVideo`) VALUES (59,'','','','','','');
 INSERT INTO `promoters`(`id`, `nameBanner`, `banner`,`linkBanner`,`nameVideo`, `video`,`linkVideo`) VALUES (60,'','','','','','');
-Banner`nameVideo`,'','',

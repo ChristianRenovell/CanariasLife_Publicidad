@@ -30,6 +30,7 @@ function querrysGett() {
             if (err) {
                 return reject(err)
             }
+            console.log(rows,"datos")
             resolve(rows);
         })
     })
@@ -39,6 +40,7 @@ function querrysSett(result) {
     return new Promise(async function (resolve, reject) {
         grupDateHours = getDate();
         for (let y = 0; y <= result.length; y++) {
+            console.log(result[y].id,"garda")
             var query2 = await connection.query(`INSERT INTO historypromotersbanner ( id, name, date)  VALUES ('${result[y].id}','${result[y].nameBanner}','${grupDateHours}')`, function (error, result2) {
                 if (error) {
                     return reject(err)
@@ -57,7 +59,7 @@ horas(0-23)
 día del mes(0-31)
 mes(0-12 o nombres)
 día de la semana (0-7, 0 es Domingo, o nombres)*/
-new CronJob('22 * * * *', function() {
+new CronJob('55 23 * * *', function() {
  
     connection.connect( function (error) {
         if (error) {
